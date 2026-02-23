@@ -1,0 +1,11 @@
+
+<div class="products-grid">
+  @for (item of allProducts; track item.id) {
+    <div class="product-card">
+      <img [src]="item.images[0]" [routerLink]="['/product', item.id]" style="cursor: pointer;">
+      
+      <h3>{{ item.name }}</h3>
+      <p>₪{{ item.price }}</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,28 @@
+<div class="account-container">
+  <aside class="sidebar">
+    <h3 class="sidebar-title">חשבון</h3>
+    <nav class="sidebar-nav">
+        <div class="nav-item" 
+            routerLink="orders" 
+            routerLinkActive="active">
+            הזמנות
+        </div>
+        
+        <div class="nav-item" 
+            routerLink="addresses" 
+            routerLinkActive="active">
+            כתובת למשלוח
+        </div>
+        
+        <div class="nav-item" 
+            routerLink="details" 
+            routerLinkActive="active">
+            הגדרות
+        </div>
+    </nav>
+  </aside>
+
+ <main class="content-area">
+    <router-outlet></router-outlet>
+  </main>
+</div>

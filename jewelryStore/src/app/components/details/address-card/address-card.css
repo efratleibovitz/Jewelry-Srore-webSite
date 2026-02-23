@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
+
+/* .card-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+/* פס שחור לכתובת ברירת מחדל */
+/* .card-box.default {
+    border-right: 4px solid #000;
+}
+.card-info {
+    text-align: right; 
+}
+
+.card-info strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+.card-info p {
+    margin: 2px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.card-footer {
+    display: flex;
+    gap: 15px;
+}
+
+.card-footer button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.card-footer button.text-danger {
+    color: #ff4d4f;
+} */ 
+
+/* address-card.css */
+
+.card-box {
+    /* הוספת הפונט לכל הכרטיס */
+    font-family: 'Heebo', sans-serif; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px; /* מעט פחות פדינג למראה מהודק */
+    background: #fff;
+    border: 1px solid #eee; /* גוון אפור עדין יותר */
+    margin-bottom: 15px;
+    direction: rtl;
+}
+/* פס שחור לכתובת ברירת מחדל */
+.card-box.default {
+    border-right: 4px solid #000;
+}
+
+.card-info {
+    text-align: right; 
+    /* התאמה לעברית */
+    direction: rtl;
+}
+.card-info strong {
+    display: block;
+    font-size: 16px; /* בתמונה השם לא ענק, הוא פשוט בולט */
+    font-weight: 500; /* עובי בינוני, לא בולד כבד */
+    margin-bottom: 4px;
+    color: #000;
+    letter-spacing: -0.02em; /* ריווח אותיות מעט צפוף למראה מודרני */
+}
+.card-info p {
+    margin: 0;
+    color: #777; /* אפור מעט בהיר יותר */
+    font-size: 14px;
+    font-weight: 300; /* דק יותר, כמו בתמונה */
+    line-height: 1.4;
+}
+
+.card-footer {
+    display: flex;
+    gap: 20px;
+}
+
+.card-footer button {
+    background: none;
+    border: none;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    color: #999;
+    text-decoration: none; /* בתמונה בדרך כלל אין קו תחתון בברירת מחדל */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.card-footer button:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* ביטול הצבע האדום של המחיקה למראה יוקרתי */
+.card-footer .text-danger {
+    color: #888;
+}

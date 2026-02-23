@@ -1,0 +1,512 @@
+.product-page {
+  display: flex;
+  flex-direction: row; /* תמונה בשמאל, טקסט בימין */
+  align-items: flex-start; /* חשוב מאוד כדי שה-sticky יעבוד */
+  gap: 30px;
+  padding: 40px;
+  direction: rtl; /* הטקסט מיושר לימין */
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* --- צד שמאל: תמונות --- */
+.image-section {
+  flex: 1.5;
+  display: flex;
+  gap: 15px;
+  flex: 1.2;
+  position: sticky;
+  top: 20px;
+}
+
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumbnails img {
+  width: 70px;
+  height: 90px;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+}
+
+.thumbnails img.active {
+  border: 2px solid #000;
+}
+
+.main-display {
+  position: relative;
+  flex-grow: 1;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.main-image {
+  max-width: 100%;
+  max-height: auto;
+display: block;
+}
+
+.action-icons {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  flex-direction: column; /* אחד מתחת לשני */
+  gap: 10px;
+  z-index: 20;
+}
+/* 
+.sizes-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+} */
+
+.icon-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  cursor: pointer;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+  z-index: 10;
+}
+
+.left { left: 10px; }
+.right { right: 10px; }
+
+/* --- צד ימין: טקסט --- */
+.info-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto; /* מאפשר גלילה פנימית אם צריך */
+  padding-bottom: 50px;
+}
+
+.product-title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.product-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.promo-box {
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cart-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.add-to-cart-btn {
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; /* מעבר חלק */
+}
+
+.add-to-cart-btn:hover {
+  background-color: #fff; /* הופך ללבן */
+  color: #000; /* הטקסט הופך לשחור */
+  border: 1px solid #000; /* מסגרת דקה נשארת */
+}
+
+.quantity-input {
+  flex: 1;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+/* .size-box {
+  width: 50px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000; 
+  background-color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s;
+} */
+/* 
+.size-box:hover {
+  background-color: #f0f0f0;
+} */
+
+.size-selector {
+    margin: 20px 0;
+    width: 100%;
+}
+
+/* סידור השורה של הכותרות */
+.size-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    direction: ltr;
+}
+
+.size-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    order: 2;
+}
+
+.size-guide-link {
+    font-size: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #333;
+    font-weight: 500;
+    order: 1;
+}
+
+.size-guide-container {
+    padding: 10px 20px;
+}
+
+.size-guide-link:hover {
+    color: #000;
+}
+
+/* סידור המשבצות */
+.sizes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-left: 5%;
+    direction:inherit; /* משאיר את המשבצות מסודרות משמאל לימין או ימין לשמאל לפי בחירתך */
+}
+
+/* עיצוב משבצת המידה */
+.size-box {
+    width: 55px;
+    height: 40px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #fff;
+    position: relative; /* חשוב בשביל הקו האלכסוני */
+    overflow: hidden;   /* מונע מהקו לצאת מהגבולות */
+}
+
+/* סימון מידה שנבחרה - אם תרצי להוסיף בעתיד */
+.size-box.selected {
+    border-color: #000;
+    color: white;
+    background-color: #000;
+    font-weight: bold;
+}
+
+.size-box:hover {
+    border-color: #000;
+    background-color: #f9f9f9;
+}
+
+.size-table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl; /* יישור טקסט בטבלה לימין */
+}
+
+.size-table th {
+    border-bottom: 2px solid #000; /* קו שחור עבה מתחת לכותרת */
+    padding: 20px 10px; /* רווח גדול למעלה ולמטה */
+    font-weight: bold;
+    text-align: center;
+}
+
+.size-table td {
+    padding: 18px 10px; /* רווח גדול בין השורות */
+    border-bottom: 1px solid #eee; /* קו אפור עדין בין השורות */
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* ביטול הקו בשורה האחרונה */
+.size-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* הוספת אפקט מעבר שורה */
+.size-table tr:hover td {
+    background-color: #f9f9f9;
+}
+
+/* אריזת מתנה */
+.gift-option {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #fcfcfc;
+    border: 1px dashed #ccc;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+/* אקורדיון */
+.product-extra-info {
+    margin-top: 30px;
+}
+
+:ng-deep .p-accordion-header-link {
+    background: none !important;
+    border: none !important;
+    border-bottom: 1px solid #eee !important;
+    padding: 15px 0 !important;
+    font-weight: bold !important;
+    color: #000 !important;
+    text-decoration: none !important;
+}
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+}
+
+/* מוצרים משלימים */
+.related-products {
+    margin-top: 50px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+}
+
+.related-products h3 {
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+.related-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.related-item {
+    width: 150px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.related-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.related-item p {
+    font-size: 0.85rem;
+    margin: 5px 0;
+}
+
+.related-item span {
+    font-weight: bold;
+}
+
+/* עיצוב ה-Input שיראה דומה לכותרת המקורית */
+.edit-input {
+    border: 1px dashed #d1d1d1;
+    background: #f9f9f9;
+    padding: 5px;
+    border-radius: 4px;
+    font-family: inherit;
+}
+
+.title-edit {
+    font-size: 2rem; /* כמו ה-h1 שלך */
+    font-weight: bold;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.price-edit {
+    font-size: 1.5rem;
+    width: 100px;
+}
+
+/* כפתור הניהול הצף */
+.admin-floating-zone {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
+
+.disabled-area {
+    opacity: 0.6;
+    pointer-events: none; /* מונע לחיצות על בחירת מידה או הוספה לסל בזמן עריכה */
+    filter: grayscale(20%);
+}
+
+.size-box {
+  position: relative; /* חשוב בשביל המיקום של הקו */
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+
+.size-box.out-of-stock {
+    color: #d1d1d1 !important; /* טקסט אפור בהיר */
+    cursor: not-allowed;
+    background-color: #fafafa;
+    border-color: #eee;
+    pointer-events: none; /* שלא יהיה אפשר ללחוץ */
+    position: relative; /* חשוב שהאלכסון יתייחס למסגרת */
+    overflow: hidden;
+}
+
+/* יצירת ה-X בעזרת אלמנטים מדומים */
+.size-box.out-of-stock::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%; /* הקו יהיה בדיוק ברוחב הקופסה */
+    height: 1px; /* קו דק ויוקרתי */
+    background-color: #ff4d4f; /* אדום עדין */
+    z-index: 1;
+}
+
+.size-box.out-of-stock::after 
+{
+  display: none;
+}
+.size-box.out-of-stock::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.size-box.out-of-stock::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* מוודא שהמספר עצמו יהיה מתחת לקווים או מעליהם בצורה ברורה */
+.size-box span {
+    position: relative;
+    z-index: 0;
+}
+.promo-edit {
+  background: transparent;
+  border: 1px dashed white;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+
+/* הגבלת כמות - ויזואליות */
+.quantity-input:invalid {
+  border: 2px solid red;
+}
+
+
+/* מצביע של יד כשעורכים מידות */
+.admin-edit-cursor {
+    cursor: pointer !important;
+    border: 1px dashed #ff4d4f; /* מסגרת מקווקוות כדי לסמן שזה עריך */
+}
+
+/* עיצוב ה-input של המבצע */
+.promo-edit-input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    text-align: center;
+}
+
+.size-btn {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    min-width: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* חשוב בשביל הקו האלכסוני */
+}   
+
+/* במצב עריכה - ביטול החסימה של לחיצות */
+.size-btn.admin-mode {
+    pointer-events: auto !important;
+    border-style: dashed;
+    border-color: #ff4d4f;
+}
+
+/* הקו האלכסוני (מעודכן) */
+.size-btn.out-of-stock::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140%;
+    height: 1px;
+    background-color: #ff4d4f;
+    transform: translate(-50%, -50%) rotate(45deg);
+    /* חשוב מאוד: הקו לא יחסום את הלחיצה על הכפתור */
+    pointer-events: none; 
+}
+
+
+.size-btn.selected {
+    background-color: #000 !important; /* רקע שחור */
+    color: #fff !important;            /* טקסט לבן */
+    border-color: #000;
+    font-weight: bold;
+
+}
+
+.promo-edit-input {
+    z-index: 10;
+    position: relative;
+    pointer-events: auto !important;
+    cursor: text;
+}

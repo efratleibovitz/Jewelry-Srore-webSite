@@ -1,0 +1,184 @@
+<div dir="rtl">
+<div class="topbar">
+ <button class="filterPill" type="button" (click)="openOptions()">
+  
+
+  <svg class="sliderIcon" viewBox="0 0 48 24" aria-hidden="true">
+    <line x1="6" y1="7" x2="30" y2="7"></line>
+    <circle cx="33" cy="7" r="3.5"></circle>
+
+    <line x1="9" y1="17" x2="33" y2="17"></line>
+    <circle cx="6" cy="17" r="3.5"></circle>
+  </svg>
+  <span class="filterText">סינון / מיון</span>
+</button>
+</div>
+
+  <app-product-arr [products]="viewProducts"></app-product-arr>
+
+  @if (isOptionsOpen) {
+    <div class="overlay" (click)="closeOptions()"></div>
+
+    <aside class="panel" (click)="$event.stopPropagation()">
+
+      <div class="panel-header">
+        <button class="xbtn" type="button" (click)="closeOptions()">✕</button>
+        <div class="title">סינון / מיון</div>
+        <button class="link" type="button" (click)="clearAll()">נקה</button>
+      </div>
+
+      <!-- מיון -->
+      <div class="block">
+        <div class="block-title">מיון</div>
+
+        <label class="radio">
+          <input type="radio" name="sort" [checked]="sortValue==='price_asc'" (change)="sortValue='price_asc'">
+          <span>מהזול אל היקר</span>
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="sort" [checked]="sortValue==='price_desc'" (change)="sortValue='price_desc'">
+          <span>מהיקר אל הזול</span>
+        </label>
+
+        <label class="radio">
+          <input type="radio" name="sort" [checked]="sortValue==='new'" (change)="sortValue='new'">
+          <span>חדש</span>
+        </label>
+
+        <button class="primary" type="button" (click)="applySort()">מיין</button>
+      </div>
+
+      <!-- סינון -->
+      <div class="block">
+        <div class="block-title">סינון</div>
+
+        <!-- צבע -->
+        <button class="accRow" type="button" (click)="toggleColor()">
+          <span>צבע</span>
+          <span class="plus">{{ isColorOpen ? '−' : '+' }}</span>
+        </button>
+
+        @if (isColorOpen) {
+          <div class="accBody">
+            <label class="radio">
+              <input type="radio" name="color" [checked]="selectedColor==='silver'" (change)="selectedColor='silver'">
+              <span>כסף</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="color" [checked]="selectedColor==='gold'" (change)="selectedColor='gold'">
+              <span>זהב</span>
+            </label>
+
+            <label class="radio">
+              <input type="radio" name="color" [checked]="selectedColor==='colorful'" (change)="selectedColor='colorful'">
+              <span>צבעוני</span>
+            </label>
+          </div>
+        }
+<button class="accRow" type="button" (click)="toggleStyle()">
+  <span>סגנון</span>
+  <span class="plus">{{ isStyleOpen ? '−' : '+' }}</span>
+</button>
+
+@if (isStyleOpen) {
+  <div class="accBody">
+    
+    <label class="radio">
+      <input type="radio" name="style"
+             [checked]="selectedStyle==='classic'"
+             (change)="selectedStyle='classic'">
+      <span>קלאסי</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="style"
+             [checked]="selectedStyle==='trendy'"
+             (change)="selectedStyle='trendy'">
+      <span>טרנדי</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="style"
+             [checked]="selectedStyle==='pearls'"
+             (change)="selectedStyle='pearls'">
+      <span>פנינים</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="style"
+             [checked]="selectedStyle==='studio'"
+             (change)="selectedStyle='studio'">
+      <span>סטודיו</span>
+    </label>
+
+</div>
+}
+<button class="accRow" type="button" (click)="toggleCategory()">
+  <span>קטגוריה</span>
+  <span class="plus">{{ isCategoryOpen ? '−' : '+' }}</span>
+</button>
+
+@if (isCategoryOpen) {
+  <div class="accBody">
+
+    <label class="radio">
+      <input type="radio" name="category"
+             [checked]="selectedCategory==='necklaces'"
+             (change)="selectedCategory='necklaces'">
+      <span>שרשראות</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="category"
+             [checked]="selectedCategory==='earrings'"
+             (change)="selectedCategory='earrings'">
+      <span>עגילים</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="category"
+             [checked]="selectedCategory==='bracelets'"
+             (change)="selectedCategory='bracelets'">
+      <span>צמידים</span>
+    </label>
+
+    <label class="radio">
+      <input type="radio" name="category"
+             [checked]="selectedCategory==='rings'"
+             (change)="selectedCategory='rings'">
+      <span>טבעות</span>
+    </label>
+
+  </div>
+}
+        <!-- מחיר -->
+        <button class="accRow" type="button" (click)="togglePrice()">
+          <span>מחיר</span>
+          <span class="plus">{{ isPriceOpen ? '−' : '+' }}</span>
+        </button>
+
+        @if (isPriceOpen) {
+          <div class="accBody">
+            <div class="rangeText">
+              <span>{{ priceRange[0] }}</span>
+              <span>—</span>
+              <span>{{ priceRange[1] }}</span>
+            </div>
+
+            <p-slider
+              [(ngModel)]="priceRange"
+              [range]="true"
+              [min]="minPossible"
+              [max]="maxPossible">
+            </p-slider>
+          </div>
+        }
+
+        <button class="primary" type="button" (click)="applyFilter()">סנן</button>
+      </div>
+
+    </aside>
+  }
+</div>

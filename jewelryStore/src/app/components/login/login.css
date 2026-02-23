@@ -1,0 +1,200 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+  color: #111;
+}
+
+/* מרכז את שתי העמודות באמת באמצע המסך */
+.content {
+  min-height: auto;
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+  justify-content: center;
+  align-items: flex-start; /* כדי שלא "ימתח" למרכז אנכי מוזר */
+  gap: 48px;
+  padding: 0 24px 20px;
+}
+
+/* “כרטיס” מרובע */
+.existUser,
+.newUser {
+  width: min(420px, 90vw);   /* במקום 20vw שגורם לדברים להיות קטנים מדי */
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  /* border: 1px solid #000; */
+  background: #fff;
+  padding: 20px 18px 18px;
+}
+
+/* כותרת שחורה - מרובעת */
+.title {
+  background: #dfdede;
+  color: #000000;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -20px -18px 18px; 
+}
+
+.title h3 {
+  margin: 0;
+  font-size: 25px;
+  letter-spacing: 0.2px;
+}
+
+label {
+  margin: 10px 0 6px;
+  font-weight: 700;
+  text-align: center;
+}
+
+input {
+  height: 38px;
+  border: 1px solid #000;
+  padding: 8px 10px;
+  outline: none;
+  background: #fff;
+}
+
+/* פוקוס ברור בלי עיגולים */
+input:focus {
+  border-width: 2px;
+}
+
+/* כפתורים מרובעים, שחור/אפור */
+button {
+  margin-top: 12px;
+  height: 40px;
+  border: 1px solid #000;
+  background: #e9e9e9;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #dcdcdc;
+}
+
+button:active {
+  background: #cfcfcf;
+}
+
+/* כפתור “שליחה” אפשר לתת לו שחור כדי שיבלוט */
+.button {
+  background: #000;
+  color: #fff;
+  height: 30px;
+}
+
+.button:hover {
+  background: #111;
+}
+
+
+
+.progressBar {
+  width: 100%;
+  height: 25px;   
+  margin-top: 12px;
+}
+.check {
+  height: 32px;  
+  font-size: 14px;
+}
+/* קו עם "או" באמצע */
+.socialDivider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-weight: 700;
+}
+
+.socialDivider::before,
+.socialDivider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #000;
+}
+
+.socialDivider span {
+  margin: 0 12px;
+}
+
+/* כפתורים חברתיים */
+.socialBtn {
+    width: 100%;
+  height: 48px;
+  border: 1px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 14px;
+  color: #fff;
+  direction: rtl;
+
+  position: relative; 
+
+}
+.socialBtn .text {
+  flex: 1;
+  text-align: center;
+}
+
+/* האייקון בצד ימין */
+.socialBtn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Facebook */
+.facebook {
+  background: #1877F2;
+}
+
+/* Google */
+.google {
+  background: #5faaff;
+}
+
+
+/* אייקון בצד שמאל */
+.socialBtn .icon {
+  position: absolute;
+  left: 15px;
+  font-weight: bold;
+}
+
+/* Facebook */
+.facebook {
+  background: #3b5998;
+}
+
+/* Google */
+.google {
+  background: #4285F4;
+}
+.whiteBg {
+  background: #fff;
+}
+/* רספונסיביות: במסך צר יורד לעמודה אחת */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+}

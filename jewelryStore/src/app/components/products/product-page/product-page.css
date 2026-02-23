@@ -1,0 +1,159 @@
+.topbar{ 
+    padding: 16px;
+    display: flex;
+    /* justify-content: flex-end;  */
+ }
+.filterPill{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  height: 56px;
+  padding: 0 18px;
+
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+
+  cursor: pointer;
+  overflow: visible;
+}
+
+.filterText{
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.sliderIcon{
+  width: 44px;
+  height: 26px;
+
+  flex: 0 0 auto;
+  display: block;
+
+  stroke: #111;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+
+/* בלי אפקט קפיצה */
+.filterPill:hover{
+  transform: none;
+  box-shadow: none;
+}
+.filterBtn{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.filterBtn .icon{
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #eee;
+  border-radius: 999px;
+}
+
+/* Overlay */
+.overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 999;
+}
+
+/* Panel */
+.panel{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 420px;
+  height: 100vh;
+  background: #fff;
+  z-index: 1000;
+  overflow-y: auto;
+  box-shadow: -10px 0 25px rgba(0,0,0,0.15);
+}
+
+.panel-header{
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  align-items: center;
+  padding: 14px 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.xbtn{ border: none; background: transparent; font-size: 20px; cursor: pointer; }
+.title{ text-align: center; font-weight: 800; font-size: 18px; }
+.link{ border: none; background: transparent; cursor: pointer; font-weight: 800; }
+
+.block{
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.block-title{
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* radio */
+.radio{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+/* accordion rows */
+.accRow{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: transparent;
+  padding: 14px 0;
+  cursor: pointer;
+  font-weight: 800;
+  border-top: 1px solid #f1f1f1;
+}
+
+.plus{
+  font-size: 22px;
+  line-height: 1;
+}
+
+.accBody{
+  padding: 6px 0 14px;
+}
+
+.rangeText{
+  display: flex;
+  gap: 10px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.primary{
+  width: 100%;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: #000;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+  margin-top: 12px;
+}

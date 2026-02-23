@@ -1,0 +1,96 @@
+<footer class="footer">
+  <div class="footer__inner">
+
+    <!-- Brand -->
+    <div class="footer__brand">
+      <img class="footer__logo" [src]="logoSrc" alt="Magnolia Logo" />
+      <p class="footer__tagline">{{ brandLine }}</p>
+    </div>
+
+    <div class="footer__divider"></div>
+
+    <!-- Columns -->
+    <div class="footer__grid">
+
+      <!-- Contact -->
+      <section class="footer__col">
+        <h4 class="footer__title">צור קשר</h4>
+
+        <ul class="footer__list footer__contact">
+          <li class="contact-item">
+            <span class="label">טלפון</span>
+            <span class="value ltr">03-1234567</span>
+          </li>
+
+          <li class="contact-item">
+            <span class="label">מייל</span>
+            <span class="value ltr">info@magnolia.co.il</span>
+          </li>
+
+          <li class="contact-item">
+            <details class="address-dd">
+              <summary class="value">סניפים</summary>
+
+              <ul class="address-list">
+                <li class="address-item">אשדוד – סיטי מול</li>
+                <li class="address-item">תל אביב – עזריאלי</li>
+                <li class="address-item">ירושלים – קניון מלחה</li>
+                <li class="address-item">ראשון לציון – קניון הזהב</li>
+              </ul>
+            </details>
+          </li>
+
+          <li class="contact-item">
+            <span class="label">שעות פעילות</span>
+            <span class="value">א׳-ה׳ 09:00–20:00</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Customer Service -->
+      <section class="footer__col">
+        <h4 class="footer__title">שירות לקוחות</h4>
+        <ul class="footer__list">
+          <li><a class="footer__link" routerLink="/faq">שאלות נפוצות</a></li>
+          <li><a class="footer__link" routerLink="/shipping-policy">מדיניות משלוחים</a></li>
+          <li><a class="footer__link" routerLink="/returns">החזרות והחלפות</a></li>
+          <li><a class="footer__link" routerLink="/terms">תנאי שימוש</a></li>
+          <li><a class="footer__link" routerLink="/privacy">מדיניות פרטיות</a></li>
+        </ul>
+      </section>
+
+      <!-- About -->
+      <section class="footer__col">
+        <h4 class="footer__title">אודות</h4>
+        <ul class="footer__list">
+<li><a class="footer__link" routerLink="/about" fragment="story">הסיפור שלנו</a></li>
+<li><a class="footer__link" routerLink="/about" fragment="values">הערכים שלנו</a></li>
+<li><a class="footer__link" routerLink="/about" fragment="materials">חומרי הגלם שלנו</a></li>
+<li><a class="footer__link" routerLink="/about" fragment="sustainability">קיימות</a></li>
+        </ul>
+      </section>
+
+      <!-- Quick Links -->
+      <section class="footer__col">
+        <h4 class="footer__title">ניווט מהיר</h4>
+        <ul class="footer__list">
+          <li><a class="footer__link" routerLink="/category/necklaces">שרשראות</a></li>
+          <li><a class="footer__link" routerLink="/category/earrings">עגילים</a></li>
+          <li><a class="footer__link" routerLink="/category/bracelets">צמידים</a></li>
+          <li><a class="footer__link" routerLink="/category/rings">טבעות</a></li>
+          <li><a class="footer__link" routerLink="/custom-design">עיצוב אישי</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="footer__divider footer__divider--bottom"></div>
+
+    <!-- Subfooter -->
+    <div class="footer__bottom">
+      <span class="footer__copyright">
+        © {{ year }} Magnolia Jewelry. כל הזכויות שמורות.
+      </span>
+    </div>
+
+  </div>
+</footer>

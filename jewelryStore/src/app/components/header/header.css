@@ -1,0 +1,73 @@
+.main-header {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  direction: rtl; /* יישור לימין כמו בתמונה */
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+}
+
+.nav-menu ul li a {
+  text-decoration: none; /* מבטל קו תחתון */
+  color: inherit;        /* לוקח את הצבע מה-li המקורי */
+  display: block;       /* גורם לכל שטח הקישור להיות לחיץ */
+}
+
+.user-actions i, .search-icon i {
+  font-size: 1.5rem;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.logo img {
+  height: 60px; /* התאימי לפי הלוגו שלך */
+}
+
+.nav-menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px 0 0 0;
+  margin: 0;
+  font-weight: 500;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.nav-menu li {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 400; /* מצב רגיל - עובי רגיל */
+  color: #333;
+  transition: all 0.2s ease; /* אנימציה קצרה וחלקה */
+  display: inline-block; 
+}
+
+.nav-menu li:hover {
+    font-weight: 700;
+    color: #000;
+    transform: scale(1.05);
+}
+
+.red-text {
+  color: red;
+}
+.p-button-text {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+:host ::ng-deep .user-actions .p-button {
+  color: #111 !important;
+}
+.icon-btn{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

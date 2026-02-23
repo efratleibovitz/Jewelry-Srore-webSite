@@ -1,0 +1,29 @@
+<div class="stepper-mini">
+  <div class="step" [class.active]="isStepCompleted(OrderStatus.Received)">
+    <div class="circle">
+      <span *ngIf="status <= OrderStatus.Received">1</span>
+      <span *ngIf="status > OrderStatus.Received">✓</span>
+    </div>
+    <span>התקבלה</span>
+  </div>
+
+  <div class="line" [class.filled]="isStepCompleted(OrderStatus.Processing)"></div>
+
+  <div class="step" [class.active]="isStepCompleted(OrderStatus.Processing)">
+    <div class="circle">
+      <span *ngIf="status <= OrderStatus.Processing">2</span>
+      <span *ngIf="status > OrderStatus.Processing">✓</span>
+    </div>
+    <span>בהכנה</span>
+  </div>
+
+  <div class="line" [class.filled]="isStepCompleted(OrderStatus.Shipped)"></div>
+
+  <div class="step" [class.active]="isStepCompleted(OrderStatus.Shipped)">
+    <div class="circle">
+      <span *ngIf="status <= OrderStatus.Shipped">3</span>
+      <span *ngIf="status > OrderStatus.Shipped">✓</span>
+    </div>
+    <span>נשלחה</span>
+  </div>
+</div>

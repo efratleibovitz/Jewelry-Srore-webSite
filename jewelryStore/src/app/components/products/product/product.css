@@ -1,0 +1,110 @@
+.product-card{
+  width: 260px;
+  /* width: 20vw; */
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* .product-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+} */
+
+.img-wrap{
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: #f3f3f3;
+}
+
+.img-wrap img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.content{
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.name{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.desc{
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+  height: 38px;
+  overflow: hidden;
+}
+
+.bottom-row{
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.price{
+  font-size: 16px;
+  font-weight: 800;
+}
+
+/* .btn{
+  border: none;
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #111;
+  color: #fff;
+}
+
+.btn:hover{
+  opacity: .92;
+} */
+ .icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* .icon-btn:hover {
+  background: #444;
+  transform: scale(1.05);
+} */
+
+.icon-btn i {
+  font-size: 14px;
+}
+
+.success-msg {
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  margin-top: 5px;
+  transition: opacity 0.3s ease;
+  text-align: center;
+}
+.product-card { position: relative; }

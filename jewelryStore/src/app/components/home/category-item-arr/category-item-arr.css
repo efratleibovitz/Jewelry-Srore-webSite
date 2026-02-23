@@ -1,0 +1,27 @@
+.main-grid-container {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #fff;
+}
+
+.grid-item {
+  flex: 1; /* מחלק את המסך ל-6 חלקים שווים */
+  border-right: 1px solid #e0e0e0; /* קו מפריד מצד ימין */
+}
+
+.grid-item:last-child {
+  border-right: none; /* ביטול הקו בפריט האחרון */
+}
+
+/* התאמה לניידים - אם המסך קטן, זה יהפוך ל-2 בשורה */
+@media (max-width: 768px) {
+  .main-grid-container {
+    flex-wrap: wrap;
+  }
+  .grid-item {
+    flex: 0 0 50%; 
+    border-bottom: 1px solid #e0e0e0;
+  }
+}

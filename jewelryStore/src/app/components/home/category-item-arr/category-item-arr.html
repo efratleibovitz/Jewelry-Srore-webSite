@@ -1,0 +1,10 @@
+<div class="main-grid-container">
+  @for (item of categories; track item.title) {
+    <div class="grid-item" routerLink="/shop" style="cursor: pointer;">
+      <app-category-item 
+        [title]="item.title" 
+        [imagePath]="item.image">
+      </app-category-item>
+    </div>
+  }
+</div>

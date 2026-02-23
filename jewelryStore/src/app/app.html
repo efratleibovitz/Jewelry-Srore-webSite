@@ -1,0 +1,37 @@
+
+<!-- <app-header></app-header>
+<app-category-arr></app-category-arr> -->
+<app-header (openCart)="openCart()" (openUser)="openUser()"></app-header>
+<!-- <app-product-page></app-product-page> -->
+ <!-- <app-home></app-home> -->
+<router-outlet />
+<app-page-footer></app-page-footer>
+<p-drawer
+ #drawer
+ [visible]="cartVisible"
+(visibleChange)="cartVisible = $event"
+  position="left"
+  [style]="{ width: '380px' }"
+  [modal]="false"
+  [showCloseIcon]="true"
+ 
+>
+  <app-cart  [cartItems]="cartItems"
+          (closeCart)="closeCart()"></app-cart>
+</p-drawer> 
+<p-dialog
+   header="התחברות"
+ [(visible)]="userVisible"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '750px' }"
+  [draggable]="false"
+  [resizable]="false"
+  [contentStyle]="{ overflow: 'auto' }"
+  styleClass="authDialog"
+>
+  <app-login  
+          (closeUser)="closeUser()"></app-login>
+</p-dialog>
+
+

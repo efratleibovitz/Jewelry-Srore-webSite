@@ -1,0 +1,82 @@
+/* address-management.css */
+
+.management-header {
+    position: relative;        /* מאפשר לכפתור להיצמד לשמאל יחסית לשורה */
+    display: flex;
+    justify-content: center;   /* ממרכז את הכותרת בדיוק באמצע */
+    align-items: center;       /* יישור אנכי */
+    padding: 20px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    min-height: 60px;          /* מבטיח גובה קבוע לשורה */
+}
+
+.management-header h2 {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0;
+    padding-bottom: 15px;
+    color: #333;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.add-btn {
+    position: absolute;        /* מוציא את הכפתור מהזרימה הרגילה */
+    left: 0;                   /* מצמיד אותו לשמאל הקיצוני */
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #333;
+}
+.address-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay {
+    position: absolute; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background: white; padding: 30px; border-radius: 8px;
+    width: 400px; position: relative; z-index: 1001;
+    direction: rtl;
+}
+
+.form-grid input {
+    width: 100%; padding: 10px; margin-bottom: 10px;
+    border: 1px solid #ddd; border-radius: 4px;
+}
+
+.row { display: flex; gap: 10px; }
+
+.modal-actions {
+    display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;
+}
+
+.btn-save { background: #000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
+.btn-cancel { background: #eee; border: none; padding: 10px 20px; cursor: pointer; }
+
+
+.addresses-grid {
+  display: flex;
+  flex-direction: column; /* אחד מעל השני */
+  gap: 15px;             /* מרווח בין המלבנים */
+  margin-top: 20px;
+}

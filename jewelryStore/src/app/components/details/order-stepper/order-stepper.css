@@ -1,0 +1,59 @@
+.stepper-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 15px;
+  min-width: 280px; /* רוחב מינימלי כדי שהטקסט לא יישבר */
+  direction: rtl;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+.circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  transition: all 0.3s ease;
+}
+
+/* כשהשלב פעיל או הושלם */
+.step.active .circle span {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+.step span {
+  font-size: 10px;
+  margin-top: 6px;
+  white-space: nowrap;
+  color: #888;
+}
+.step.active .circle {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+}
+/* הקו המחבר */
+.line {
+  flex-grow: 1;
+  height: 2px;
+  background: #eee;
+  margin-bottom: 18px; /* דוחף את הקו למעלה לגובה של העיגול */
+}
+
+.line.filled {
+  background: #000;
+}

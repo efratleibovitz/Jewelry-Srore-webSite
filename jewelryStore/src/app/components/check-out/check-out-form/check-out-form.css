@@ -1,0 +1,244 @@
+/* --- מבנה כללי ואקורדיון --- */
+.step {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 24px 0;
+  transition: all 0.3s ease;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.step.active .step-header {
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  margin-left: 15px;
+}
+
+.step-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.step-content {
+  padding-right: 43px; /* יישור עם הכותרת אחרי העיגול */
+  animation: slideDown 0.4s ease-out;
+}
+
+/* --- עיצוב טפסים ושדות קלט --- */
+.row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.input-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+  text-align: right;
+}
+
+/* שדות קלט בסגנון נקי (כמו בתמונות) */
+input[type="text"], 
+input[type="tel"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 2px;
+  font-size: 14px;
+  outline: none;
+  background-color: #f4f7f9; /* רקע אפרפר עדין */
+  transition: all 0.2s;
+  text-align: right;
+}
+
+input:focus, textarea:focus {
+  border-color: #000;
+  background-color: #fff;
+}
+
+/* --- שדות ספציפיים --- */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.char-count {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+  text-align: left; /* מספר התווים מצד שמאל */
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* --- שיטות משלוח (רדיו) --- */
+.radio-box {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.radio-box:hover {
+  background-color: #fcfcfc;
+}
+
+.radio-box input {
+  margin-left: 12px;
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.option-text small {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+
+/* --- בחירת סניף --- */
+.branch-container {
+  margin: 10px 40px 20px 0;
+}
+
+.branch-select {
+  max-width: 320px;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 12px top 50%;
+  background-size: 10px auto;
+}
+
+/* --- כפתורים ואנימציות --- */
+.black-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 14px 0;
+  width: 100%;
+  max-width: 180px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-right: auto; /* דוחף את הכפתור לשמאל */
+  display: block;
+}
+
+.black-btn:hover {
+  background-color: #333;
+}
+
+
+.payment-option {
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.payment-text {
+  display: flex;
+  flex-direction: row-reverse; /* כדי שהאייקונים יהיו משמאל לטקסט */
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.payment-icons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.payment-icons img {
+  height: 20px;
+  width: auto;
+}
+
+.paypal-logo {
+  height: 24px;
+  margin-right: 10px;
+}
+
+.credit-card-details {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+  border-top: none; /* חיבור לרדיו שמעליו */
+}
+
+.security-footer {
+  margin-top: 25px;
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.security-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  color: #666;
+  font-size: 13px;
+}
+
+.security-item img {
+  height: 30px;
+  filter: grayscale(1); /* מראה נקי יותר כמו במקור */
+  opacity: 0.6;
+}
+
+.submit-btn {
+  max-width: 100% !important; /* כפתור אישור הזמנה רחב במיוחד */
+  font-size: 16px;
+  padding: 16px 0;
+}
+
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

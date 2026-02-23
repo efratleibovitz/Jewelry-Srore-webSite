@@ -1,0 +1,73 @@
+<div class="cart">
+    <div class="header">
+        <h2 class="title">סל הקניות שלי</h2>
+    </div>
+<!-- פריט בודד בתוך הסל (תבנית/בלוק אחד) -->
+ <div class="body">
+    <div *ngFor="let item of cartItems" class="cart-item">
+
+  <!-- ימין: תמונה -->
+        <img class="thumb" [src]="item.imageUrl" [alt]="item.name" />
+
+  <!-- שמאל לתמונה: תוכן -->
+        <div class="content">
+            <div class="name">{{ item.name }}</div>
+            <div class="qty">
+            <button pButton type="button" class="qty-btn" icon="pi pi-minus"
+                    (click)="dec(item)" [disabled]="item.quantity <= 1"></button>
+
+            <span class="qty-num">{{ item.quantity }}</span>
+
+            <button pButton type="button" class="qty-btn" icon="pi pi-plus"
+                    (click)="inc(item)"></button>
+            </div>
+
+            <div class="price">{{ item.price * item.quantity }} ₪</div>
+        </div>
+
+  <!-- פח בפינה שמאלית למטה -->
+        <button pButton type="button" class="trash-btn" icon="pi pi-trash"
+                (click)="remove(item)"></button>
+    </div>
+ </div>
+ <div class="footer">
+     
+
+    <div class="hint">
+        <h2>
+                משלוח חינם בקנייה מעל 250₪
+        </h2>
+
+    </div>
+
+    <div class="summary">
+      <div class="row">
+        <span>סה״כ מחיר</span>
+        <b>{{ totalPrice }} ₪</b>
+      </div>
+
+      <div class="row">
+        <span>סה״כ פריטים</span>
+        <b>{{ totalItems }}</b>
+      </div>
+
+      <div class="row eligibility">
+        <span>זכאות למשלוח חינם</span>
+        <span class="check" [class.ok]="freeShippingEligible">
+          <span class="mark">{{ freeShippingEligible ? '✓' : '' }}</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="footer-actions">
+        <button pButton type="button" (click)="goToCheckout()" class="pay-btn">לתשלום</button>
+      <button pButton type="button" class="continue-btn p-button-outlined"
+        (click)="close()">
+        המשך קניות
+           
+      </button>
+    </div>
+
+  
+ </div>
+</div>

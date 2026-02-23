@@ -1,0 +1,27 @@
+<div class="product-card">
+
+  <div class="img-wrap" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+  </div>
+
+  <div class="content">
+    <h3 class="name" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+      {{ product.name }}
+    </h3>
+    <p class="desc">{{  product.description }}</p>
+
+    <div class="bottom-row">
+      <span class="price">{{ product.price }} ₪</span>
+      <div class="success-msg" *ngIf="added">
+             נוסף לסל בהצלחה ✔
+      </div>
+      <!-- <button class="btn">הוספה</button> -->
+      <button class="icon-btn" (click)="addToCart()">
+        <i class="pi pi-shopping-bag"></i>
+      </button>
+    </div>
+  </div>
+
+
+</div>
+

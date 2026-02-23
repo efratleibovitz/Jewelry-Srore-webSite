@@ -1,0 +1,35 @@
+<div class="management-header">
+  <h2>הכתובות שלי</h2>
+  <button class="add-btn" (click)="openNewAddressForm()">+ הוספת כתובת חדשה</button>
+</div>
+
+<div class="addresses-grid">
+  <app-address-card 
+    *ngFor="let addr of addresses" 
+    [address]="addr"
+    (onEdit)="handleEdit($event)"
+    (onDelete)="handleDelete($event)">
+  </app-address-card>
+</div>
+
+<div class="address-modal" *ngIf="showForm">
+  <div class="modal-overlay" (click)="showForm = false"></div>
+  <div class="modal-content">
+    <h3>{{ currentAddress.id ? 'עריכת כתובת' : 'הוספת כתובת חדשה' }}</h3>
+    
+    <div class="form-grid">
+      <input [(ngModel)]="currentAddress.fullName" placeholder="שם מלא">
+      <input [(ngModel)]="currentAddress.phone" placeholder="טלפון">
+      <input [(ngModel)]="currentAddress.city" placeholder="עיר">
+      <div class="row">
+        <input [(ngModel)]="currentAddress.street" placeholder="רחוב">
+        <input [(ngModel)]="currentAddress.houseNumber" placeholder="מספר בית">
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="showForm = false">ביטול</button>
+      <button class="btn-save" (click)="saveAddress()">שמור כתובת</button>
+    </div>
+  </div>
+</div>

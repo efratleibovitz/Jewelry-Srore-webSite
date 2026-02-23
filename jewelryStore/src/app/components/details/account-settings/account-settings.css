@@ -1,0 +1,60 @@
+.account-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 30px auto;
+    direction: rtl;
+    gap: 20px;
+    
+    /* מוודא שהקונטיינר יהיה לפחות בגובה כל המסך פחות שוליים */
+    min-height: calc(100vh - 60px); 
+    align-items: stretch; /* גורם לכל הילדים הישירים להימתח לאותו גובה */
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #f8f9fa; /* האפור שבחרת */
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column; /* מסדר את האלמנטים בפנים אחד מתחת לשני */
+    
+    /* זה הסוד: הגובה יתאים את עצמו אוטומטית לגובה של האבא */
+    height: auto; 
+}
+
+.sidebar-title {
+    padding: 0 20px 20px;
+    font-size: 18px; /* הקטנה קלה למראה אלגנטי יותר */
+    font-weight: 700;
+    color: #000;
+    font-family: 'Heebo', sans-serif;
+}
+.nav-item {
+    padding: 12px 25px;
+    cursor: pointer;
+    color: #555; /* צבע טקסט מעט רך יותר */
+    font-size: 15px;
+    transition: all 0.2s ease;
+    font-family: 'Heebo', sans-serif;
+}
+
+/* אפקט מעבר עכבר */
+.nav-item:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* הפס האדום המזהה מהתמונה שלך */
+.nav-item.active {
+    /* פס אדום בצד ימין */
+    border-right: 3px solid #000; /* שיניתי לשחור למראה נקי, אפשר להשאיר אדום #ff4d4f */
+    background-color: #eeeeee; /* רקע בולט יותר לפריט הנבחר */
+    color: #000;
+    font-weight: 600;
+}
+
+.content-area {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    /* אין צורך ב-min-height קבוע כאן כי ה-container כבר מטפל בזה */
+}

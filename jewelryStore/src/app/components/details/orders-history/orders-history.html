@@ -1,0 +1,43 @@
+<div class="history-page">
+  <h1 class="title">ההזמנות שלי</h1>
+
+  @for (order of orders; track order.orderNumber) {
+    <div class="order-container">
+      
+      <div class="order-header">
+        <div class="meta">
+          <span class="order-no">הזמנה #{{ order.orderNumber }}</span>
+          <span class="order-date">{{ order.date | date:'dd/MM/yyyy' }}</span>
+        </div>
+        
+        <div class="track-wrapper">
+          <button class="track-btn">עקבי אחר ההזמנה</button>
+          <div class="status-popup">
+            <app-order-stepper [status]="order.status"></app-order-stepper>
+          </div>
+        </div>
+
+        <div class="total">₪{{ order.totalAmount }}</div>
+      </div>
+
+      <div class="order-content">
+        <div class="items-section">
+          <app-order-items-list [items]="order.items"></app-order-items-list>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <p class="casual-address">
+          <strong>נשלח ל:</strong> 
+          {{ order.shippingAddress.fullName }}, 
+          {{ order.shippingAddress.street }} {{ order.shippingAddress.houseNumber }}, 
+          {{ order.shippingAddress.city }}
+        </p>
+      </div>
+    </div>
+  } @empty {
+    <div class="no-orders">
+      <p>עדיין לא בוצעו הזמנות בחשבון זה.</p>
+    </div>
+  }
+</div>

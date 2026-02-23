@@ -1,0 +1,155 @@
+<div class="product-page" *ngIf="product">
+
+  <div class="admin-floating-zone" *ngIf="isAdmin">
+    <button class="edit-toggle-btn" (click)="toggleEdit()">
+      <i class="pi" [ngClass]="isEditMode ? 'pi-times' : 'pi-pencil'"></i>
+      {{ isEditMode ? 'בטל עריכה' : 'ערוך מוצר' }}
+    </button>
+    
+  </div>
+
+  <div class="image-section">
+    <div class="thumbnails">
+      @for (img of product.images; track img; let i = $index) {
+        <img [src]="img" 
+             [class.active]="i === currentImgIndex" 
+             (click)="setCurrentImage(i)">
+      }
+    </div>
+
+    <div class="main-display">
+      <button class="nav-arrow left" (click)="prevImage()">
+        <i class="pi pi-chevron-left"></i>
+      </button>
+      
+      <img [src]="product.images[currentImgIndex]" class="main-image">
+      
+      <button class="nav-arrow right" (click)="nextImage()">
+        <i class="pi pi-chevron-right"></i>
+      </button>
+      
+      <div class="action-icons">
+        <button class="icon-btn"><i class="pi pi-heart"></i></button>
+        <button class="icon-btn"><i class="pi pi-share-alt"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-section">
+    
+    <h1 class="product-title" *ngIf="!isEditMode">{{ product.name }}</h1>
+    <input type="text" class="edit-input title-edit" *ngIf="isEditMode" [(ngModel)]="editedProduct!.name" [ngModelOptions]="{standalone: true}">
+
+    <p class="product-sku">מק"ט: {{ product.id }}</p>
+
+    <div class="product-price" *ngIf="!isEditMode">₪{{ product.price }}</div>
+    <div class="price-edit-row" *ngIf="isEditMode">
+        <span>₪</span>
+        <input type="number" class="edit-input price-edit" [(ngModel)]="editedProduct!.price" [ngModelOptions]="{standalone: true}">
+    </div>
+
+    <div class="admin-save-actions" *ngIf="isEditMode">
+        <button class="save-btn" (click)="saveChanges()">שמור שינויים</button>
+        <button class="cancel-btn" (click)="cancelEdit()">ביטול</button>
+    </div>
+
+    <div [class.disabled-area]="isEditMode">
+        
+      <div class="promo-box">
+          <span *ngIf="!isEditMode">
+              {{ product?.promoText || 'קנו ב-₪150 שלמו ₪100' }}
+          </span>
+          
+          <input *ngIf="isEditMode" 
+                type="text" 
+                [(ngModel)]="editedProduct!.promoText" 
+                (ngModelChange)="editedProduct!.promoText = $event"
+                class="promo-edit-input">
+      </div>
+        <div class="size-selector">
+            <div class="size-header-row">
+                <span class="size-label">מידה</span>
+                <span class="size-guide-link" (click)="showSizeGuide()">מדריך מידות</span>
+            </div>
+
+            <div class="sizes-container">
+                @for (s of (isEditMode ? editedProduct!.availableSizes : product?.availableSizes); track s.size) {
+                    <button type="button" 
+                            class="size-btn"
+                            [class.out-of-stock]="!s.inStock" 
+                            [class.admin-mode]="isEditMode"
+                            [class.selected]="selectedSize === s.size"
+                            (click)="isEditMode ? toggleSizeStock(s) : selectSize(s)">
+                        {{ s.size }}
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="cart-actions" *ngIf="!isEditMode">
+          <button class="add-to-cart-btn" [disabled]="!isAnySizeInStock">
+            הוספה לסל
+          </button>
+          <input type="number" #qtyInput value="1" min="1" max="10" class="quantity-input">
+        </div>
+
+       <div class="gift-option">
+      <input type="checkbox" id="giftWrap">
+      <label for="giftWrap">🎁 האם להוסיף אריזת מתנה וכרטיס ברכה? (₪10)</label>
+    </div>
+
+    <div class="product-extra-info">
+      <p-accordion [multiple]="true">
+        <p-accordion-panel value="0">
+          <p-accordion-header>מידע טכני וחומרים</p-accordion-header>
+          <p-accordion-content>
+            <ul class="info-list">
+              <li><strong>סוג המתכת:</strong> כסף סטרלינג 925</li>
+              <li><strong>אחריות:</strong> 12 חודשי אחריות על פגמי ייצור</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="1">
+          <p-accordion-header>משלוחים והחזרות</p-accordion-header>
+          <p-accordion-content>
+            <ul class="info-list">
+              <li><strong>🚚 משלוחים עד הבית :</strong>7-10 ימי עסקים</li>
+              <li><strong>↩️ החזרות:</strong> ניתן להחזיר פריטים תוך 14 ימים מיום קבלת ההזמנה</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+
+    <div class="related-products">
+        <h3>זה יתאים לך עם...</h3>
+        <div class="related-grid">
+            <div class="related-item">
+                <img src="pictures/pearls.jpg" alt="עגילים תואמים">
+                <p>עגילי עלים תואמים</p>
+                <span>₪119</span>
+            </div>
+        </div>
+    </div>
+
+
+<p-dialog header="מדריך מידות" [(visible)]="displaySizeGuide" [modal]="true" [style]="{width: '450px'}">
+    <div class="size-guide-container">
+        <table class="size-table">
+            <thead>
+                <tr><th>קוטר פנימי</th><th>אירופאית</th><th>אמריקאית</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>15.7mm</td><td>5</td><td>50</td></tr>
+                <tr><td>16.1mm</td><td>5.5</td><td>51</td></tr>
+                <tr><td>16.5mm</td><td>6</td><td>52</td></tr>
+                <tr><td>16.9mm</td><td>6.5</td><td>53</td></tr>
+           
+             </tbody>
+        </table>
+    </div>
+</p-dialog>
+
+    </div>
+  </div>

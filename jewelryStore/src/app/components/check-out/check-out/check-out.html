@@ -1,0 +1,63 @@
+<!-- <div class="checkout-page" [formGroup]="checkoutForm">
+  
+  <div class="checkout-steps">
+    <div class="step-card" [class.open]="currentStep === 1">
+      <div class="step-header" (click)="currentStep = 1">
+        <span class="step-number">1</span>
+        <h2>פרטי משלוח</h2>
+      </div>
+      
+      <div class="step-content" *ngIf="currentStep === 1" formGroupName="personalDetails">
+        <div class="input-row">
+          <input formControlName="firstName" placeholder="שם פרטי *">
+          <input formControlName="lastName" placeholder="שם משפחה *">
+        </div>
+        <input formControlName="phone" placeholder="טלפון *">
+        <button class="black-btn" (click)="nextStep(2)">המשך</button>
+      </div>
+    </div>
+
+    <div class="step-card" [class.open]="currentStep === 2" [class.disabled]="checkoutForm.get('personalDetails')?.invalid">
+      <div class="step-header" (click)="nextStep(2)">
+        <span class="step-number">2</span>
+        <h2>שיטת משלוח</h2>
+      </div>
+      
+      <div class="step-content" *ngIf="currentStep === 2" formGroupName="shippingMethod">
+        <label class="radio-option">
+          <input type="radio" formControlName="method" value="courier">
+          שליח עד הבית (19.00 ₪)
+        </label>
+        <label class="radio-option">
+          <input type="radio" formControlName="method" value="pickup">
+          איסוף מסניף (חינם)
+        </label>
+        <button class="black-btn" (click)="nextStep(3)">המשך</button>
+      </div>
+    </div>
+
+    <div class="step-card" [class.open]="currentStep === 3" [class.disabled]="checkoutForm.get('shippingMethod')?.invalid">
+      <div class="step-header" (click)="nextStep(3)">
+        <span class="step-number">3</span>
+        <h2>שיטת תשלום</h2>
+      </div>
+      
+      <div class="step-content" *ngIf="currentStep === 3" formGroupName="paymentMethod">
+        <div class="payment-icons">
+          <p>בחרי אמצעי תשלום...</p>
+        </div>
+        <button class="black-btn confirm-btn">אישור הזמנה</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="order-sidebar">
+    <app-order-summary [data]="checkoutForm.value"></app-order-summary>
+  </div>
+</div> -->
+
+
+<div class="checkout-layout">
+  <app-check-out-form class="main-content"></app-check-out-form>
+  <app-order-summary class="sidebar"></app-order-summary>
+</div>

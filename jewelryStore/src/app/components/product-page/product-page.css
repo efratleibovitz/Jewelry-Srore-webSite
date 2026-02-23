@@ -1,0 +1,5 @@
+:host {
+  display: block;
+  padding-top: 50px; /* ריווח כדי שהמוצר לא יידבק לתפריט */
+  background-color: #ffffff;
+}

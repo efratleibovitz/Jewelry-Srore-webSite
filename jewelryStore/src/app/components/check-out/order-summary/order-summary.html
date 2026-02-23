@@ -1,0 +1,35 @@
+<div class="summary-box">
+    
+    <div class="free-shipping-progress" *ngIf="(checkoutService.subtotal | async) as subtotal">
+        <div class="progress-text">
+            <span *ngIf="subtotal < 250">
+                חסר לך רק <strong>₪{{ 250 - subtotal }}</strong> למשלוח חינם! 🎁
+            </span>
+            <span *ngIf="subtotal >= 250" class="success-text">
+                הידד! מגיע לך משלוח חינם! 🚚✨
+            </span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" 
+                 [style.width.%]="(subtotal / 250) * 100 > 100 ? 100 : (subtotal / 250) * 100">
+            </div>
+        </div>
+    </div>
+
+    <div class="line">
+        <span>סך ביניים</span>
+        <span>₪{{ checkoutService.subtotal | async }}</span>
+    </div>
+
+    <div class="line">
+        <span>משלוח</span>
+        <span [class.free-shipping]="(checkoutService.shippingCost | async) === 0">
+            {{ (checkoutService.shippingCost | async) === 0 ? 'חינם' : '₪' + (checkoutService.shippingCost | async) }}
+        </span>
+    </div>
+
+    <hr class="separator"> <div class="line total">
+        <span>סך הכל</span>
+        <span>₪{{ checkoutService.total$ | async }}</span> 
+    </div>
+</div>

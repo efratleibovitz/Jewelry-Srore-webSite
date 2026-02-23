@@ -1,0 +1,225 @@
+/* .history-page {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 300;
+  border-bottom: 1px solid #000;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.order-container {
+  border: 1px solid #f0f0f0;
+  margin-bottom: 50px;
+  background: #fff;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.order-no { font-weight: 700; font-size: 14px; }
+.order-date { color: #888; font-size: 13px; margin-right: 15px; }
+
+.order-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  padding: 25px;
+}
+
+.shipping-section {
+  border-right: 1px solid #f0f0f0;
+  padding-right: 30px;
+}
+
+.section-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: 800;
+} */
+
+.history-page {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 0 20px;
+  direction: rtl;
+  font-family: 'Assistant', sans-serif;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 300;
+  border-bottom: 1px solid #000;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.order-container {
+  border: 1px solid #f0f0f0;
+  margin-bottom: 50px;
+  background: #fff;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.order-no { font-weight: 700; font-size: 14px; margin-right: 2%; }
+.order-date { color: #888; font-size: 13px; margin-right: 15px; }
+
+.order-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* חלוקה של רשימת מוצרים מול כתובת */
+  gap: 30px;
+  padding: 25px;
+}
+
+.shipping-section {
+  border-right: 1px solid #f0f0f0;
+  padding-right: 30px;
+}
+
+.section-title {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.track-container {
+  position: relative;
+  display: inline-block;
+}
+
+.track-btn {
+  background: #fff;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.track-btn:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* הסוד של ה-Tooltip */
+/* .status-popup {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #eee;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  padding: 10px;
+  z-index: 10;
+  transition: opacity 0.3s;
+} */
+/* הבועה (הסטפר) */
+.status-popup {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 130%; /* מציב את הבועה מעל הכפתור */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff; /* חובה כדי שלא יהיה שקוף */
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  padding: 15px;
+  border-radius: 8px;
+  z-index: 999; /* גורם לזה לצוף מעל הכל */
+  transition: opacity 0.3s, visibility 0.3s;
+  min-width: 300px; /* נותן לסטפר האופקי מקום */
+}
+
+/* הצגת הבועה ברגע שנוגעים בעטיפה */
+.track-wrapper:hover .status-popup {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* הוספת "משולש" קטן בתחתית הבועה (אופציונלי, למראה יוקרתי) */
+.status-popup::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+
+.order-footer {
+  padding: 10px 25px;
+  background-color: #fdfdfd;
+  border-top: 1px solid #f2f2f2;
+}
+
+.casual-address {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+  font-weight: 300;
+}
+
+.casual-address strong {
+  color: #000;
+  margin-left: 5px;
+}
+
+/* סידור כפתור המעקב בהדר */
+.track-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.track-btn {
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 8px 20px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.track-btn:hover {
+  border-color: #000;
+  color: #f9f9f9;
+  background: #000;
+}

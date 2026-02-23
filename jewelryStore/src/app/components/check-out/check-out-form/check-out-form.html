@@ -1,0 +1,206 @@
+<!-- <div [formGroup]="checkoutService.checkoutForm">
+  
+  <div class="step" [class.active]="currentStep === 1">
+    <div class="step-header" (click)="currentStep = 1">
+       <span class="dot">1</span> <h2>פרטי משלוח</h2>
+    </div>
+    <div class="step-content" *ngIf="currentStep === 1" formGroupName="personalDetails">
+       <div class="row">
+         <input formControlName="firstName" placeholder="שם פרטי *">
+         <input formControlName="lastName" placeholder="שם משפחה *">
+       </div>
+       <input formControlName="phone" placeholder="טלפון *">
+       <button class="black-btn" (click)="nextStep(2)">המשך</button>
+    </div>
+  </div>
+
+  <div class="step" [class.active]="currentStep === 2">
+    <div class="step-header" (click)="nextStep(2)">
+       <span class="dot">2</span> <h2>שיטת משלוח</h2>
+    </div>
+
+    <div class="step-content" *ngIf="currentStep === 2" formGroupName="shipping">
+  
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="courier">
+            <span>שליח עד הבית/העבודה - ₪19.00</span>
+        </label>
+
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="pickup">
+            <div class="option-text">
+            <span>איסוף מסניף - חינם</span>
+            <small>החבילה תימסר בהצגת תעודת זהות</small>
+            </div>
+        </label>
+
+        <div class="branch-container" *ngIf="checkoutService.checkoutForm.get('shipping.method')?.value === 'pickup'">
+            <select formControlName="branch" class="branch-select">
+            <option *ngFor="let branch of checkoutService.branches" [value]="branch">
+                {{ branch }}
+            </option>
+            </select>
+        </div>
+
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="point">
+            <span>נקודת איסוף - ₪14.00</span>
+        </label>
+
+         <button class="black-btn" (click)="nextStep(3)">המשך</button>
+    </div>
+
+  </div>
+
+</div> -->
+
+
+<div [formGroup]="checkoutService.checkoutForm">
+  
+  <div class="step" [class.active]="currentStep === 1">
+    <div class="step-header" (click)="currentStep = 1">
+       <span class="dot">1</span> 
+       <h2>פרטי משלוח</h2>
+    </div>
+
+    <div class="step-content" *ngIf="currentStep === 1" formGroupName="personalDetails">
+       <div class="row">
+         <div class="input-group">
+           <label>שם פרטי *</label>
+           <input formControlName="firstName" type="text">
+         </div>
+         <div class="input-group">
+           <label>שם משפחה *</label>
+           <input formControlName="lastName" type="text">
+         </div>
+       </div>
+
+       <div class="input-group">
+         <label>טלפון *</label>
+         <input formControlName="phone" type="tel" placeholder="05XXXXXXXX">
+       </div>
+
+       <div class="input-group">
+         <label>אימייל *</label>
+         <input formControlName="email" type="email">
+       </div>
+
+       <div class="checkbox-row">
+         <input type="checkbox" id="billingAsShipping" checked>
+         <label for="billingAsShipping">כתובת החיוב ככתובת למשלוח</label>
+       </div>
+
+       <div class="input-group">
+         <label>יש לך הערות? כתבו לנו ונשמח לעזור</label>
+         <textarea formControlName="notes" rows="3"></textarea>
+         <small class="char-count">עד 200 תווים</small>
+       </div>
+
+       <button class="black-btn" (click)="nextStep(2)">המשך</button>
+    </div>
+  </div>
+
+  <div class="step" [class.active]="currentStep === 2">
+    <div class="step-header" (click)="nextStep(2)">
+       <span class="dot">2</span> 
+       <h2>שיטת משלוח</h2>
+    </div>
+
+    <div class="step-content" *ngIf="currentStep === 2" formGroupName="shipping">
+  
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="courier">
+            <span>שליח עד הבית/העבודה - עד 7 ימי עסקים ₪19.00</span>
+        </label>
+
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="pickup">
+            <div class="option-text">
+              <span>איסוף מסניף - עד 10 ימי עסקים ₪0.00</span>
+              <small>החבילה תימסר למבצע ההזמנה בלבד ובהצגת תעודת זהות</small>
+            </div>
+        </label>
+
+        <div class="branch-container" *ngIf="checkoutService.checkoutForm.get('shipping.method')?.value === 'pickup'">
+            <select formControlName="branch" class="branch-select">
+              <option *ngFor="let branch of checkoutService.branches" [value]="branch">
+                  {{ branch }}
+              </option>
+            </select>
+        </div>
+
+        <label class="radio-box">
+            <input type="radio" formControlName="method" value="point">
+            <span>נקודת איסוף - עד 10 ימי עסקים ₪14.00</span>
+        </label>
+
+        <button class="black-btn" (click)="nextStep(3)">המשך</button>
+    </div>
+  </div>
+
+    <div class="step" [class.active]="currentStep === 3">
+        <div class="step-header" (click)="nextStep(3)">
+        <span class="dot">3</span> 
+        <h2>שיטות תשלום</h2>
+        </div>
+    <div class="step-content" *ngIf="currentStep === 3" formGroupName="payment">
+    
+   
+        <label class="radio-box payment-option">
+            <input type="radio" formControlName="method" value="credit-card">
+            <div class="payment-label-container">
+                <span class="payment-title">תשלום בכרטיס אשראי וארנקים דיגיטליים</span>
+                <div class="payment-icons">
+                   <img src="pictures/icons/mastercard.png" alt="Mastercard">
+                   <img src="pictures/icons/visa.png" alt="Visa">
+                   <img src="pictures/icons/bit.png" alt="Bit">
+                   <img src="pictures/icons/gpay.png" alt="Google Pay">
+                </div>
+            </div>
+        </label>
+
+
+    <div class="credit-card-details" *ngIf="checkoutService.checkoutForm.get('payment.method')?.value === 'credit-card'">
+            <div class="input-group">
+                <label>שם בעל הכרטיס *</label>
+                <input formControlName="cardHolder" type="text" placeholder="כפי שמופיע על הכרטיס">
+            </div>
+            <div class="input-group">
+                <label>מספר כרטיס *</label>
+                <input formControlName="cardNumber" type="text" maxlength="16" placeholder="**** **** **** ****">
+            </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>תוקף *</label>
+                    <input formControlName="expiry" type="text" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="input-group">
+                    <label>CVV *</label>
+                    <input formControlName="cvv" type="text" placeholder="3 ספרות" maxlength="3">
+                </div>
+            </div>
+        </div>
+
+        <label class="radio-box payment-option">
+            <input type="radio" formControlName="method" value="paypal">
+            <div class="payment-label-container">
+                <span class="payment-title">PayPal</span>
+                <img src="pictures/icons/paypal.png" alt="PayPal" class="paypal-logo">
+            </div>
+        </label>
+
+        <button class="black-btn submit-btn" (click)="checkoutService.submitOrder()">אישור הזמנה</button>
+
+        <div class="security-footer">
+            <div class="security-item">
+                <i class="pi pi-shield" style="font-size: 1.2rem; color: #4caf50;"></i>
+                
+                <span>קנייה בטוחה בתקן אבטחה מחמיר</span>
+                
+                <i class="pi pi-lock" style="font-size: 1.2rem; color: #333;"></i>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+

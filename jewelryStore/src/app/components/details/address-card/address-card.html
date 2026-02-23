@@ -1,0 +1,15 @@
+<div class="card-box" [class.default]="address.isDefault">
+  
+  
+  <div class="card-info">
+    <strong>{{ address.fullName }}</strong>
+    <p>{{ address.street }} {{ address.houseNumber }}, {{ address.city }}</p>
+    <p>{{ address.phone }}</p>
+  </div>
+  
+  <div class="card-footer">
+    <button (click)="onEdit.emit(address)">ערוך</button>
+    <button (click)="onDelete.emit(address.id)">מחק</button>
+  </div>
+
+</div>
