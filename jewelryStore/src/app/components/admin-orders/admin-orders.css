@@ -1,0 +1,66 @@
+.admin-container {
+  padding: 40px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fcfcfc;
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.admin-header h1 {
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.stats-badge {
+  background: #eee;
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  font-size: 0.9em;
+}
+
+.luxury-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.luxury-table th {
+  padding: 20px;
+  text-align: right;
+  border-bottom: 2px solid #f0f0f0;
+  color: #888;
+  font-weight: 500;
+}
+
+.luxury-table td {
+  padding: 20px;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  background: #f0f0f0;
+}
+
+/* סגנון ל-Select שייראה יוקרתי */
+.status-select {
+  border: 1px solid #ddd;
+  padding: 6px;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-select:focus {
+  border-color: #000;
+}

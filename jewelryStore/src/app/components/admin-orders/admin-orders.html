@@ -1,0 +1,49 @@
+<!-- <h1 style="color: red; background: yellow;">בדיקת קיום: {{ testMessage }}</h1> -->
+
+<div class="admin-container">
+  <header class="admin-header">
+    <h1>ניהול הזמנות</h1>
+    <div class="stats-badge">סה"כ הזמנות: {{ orders.length }}</div>
+  </header>
+
+  <div class="table-wrapper">
+    <table class="luxury-table">
+      <thead>
+        <tr>
+          <th>מספר הזמנה</th>
+          <th>לקוח</th>
+          <th>תאריך</th>
+          <th>סכום כולל</th>
+          <th>סטטוס נוכחי</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+     <tbody>
+        <tr *ngFor="let order of orders">
+          <td>#{{ order.orderId }}</td> 
+
+          <td>משתמש מס' {{ order.userId }}</td> 
+
+          <td>{{ order.orderDate | date:'dd/MM/yyyy' }}</td> 
+
+          <td class="price">₪{{ order.orderSum }}</td> 
+
+          <td>
+            <span class="status-pill" [attr.data-status]="order.status">
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </td>
+          <td>
+            <select class="status-select" 
+                    [value]="order.status" 
+                    (change)="onStatusChange(order.orderId, $event)">
+              <option *ngFor="let s of statusOptions" [value]="s.value">
+                {{ s.label }}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

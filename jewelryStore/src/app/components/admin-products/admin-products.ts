@@ -4,7 +4,7 @@ import { ProductService } from '../../services/productService';
 import { AdminProduct } from '../../models/product.model';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms'; 
-
+import { ChangeDetectorRef } from '@angular/core'; // ייבוא
 @Component({
   selector: 'app-admin-products',
   standalone: true, 
