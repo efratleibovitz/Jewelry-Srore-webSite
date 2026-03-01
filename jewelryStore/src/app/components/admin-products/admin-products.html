@@ -1,0 +1,178 @@
+<div class="admin-wrapper" [class.modal-open]="isEditMode">
+  
+  <header class="admin-header">
+    <h1>ניהול מלאי מוצרים</h1>
+    <button class="btn-primary" (click)="onAddNew()">+ הוספת מוצר חדש</button>
+    <div class="stats">סה"כ מוצרים: {{products.length}}</div>
+  </header>
+
+
+
+  <div class="table-container">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>תמונה</th>
+          <th>מזהה</th>
+          <th>שם המוצר</th>
+          <th>מחיר</th>
+          <th>סטטוס</th>
+          <th>פעולות</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>
+            <div class="img-preview">
+              <img [src]="product.image1" alt="product">
+            </div>
+          </td>
+          <td class="id-cell">#{{product.productId}}</td>
+          <td class="name-cell">{{product.productName}}</td>
+          <td class="price-cell">₪{{product.productPrice}}</td>
+          <td>
+            <span class="status-badge" [class.online-only]="product.justOnline">
+              {{ product.justOnline ? 'Online Only' : 'פעיל' }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button class="btn-icon edit" (click)="onEdit(product)" title="עריכה">
+               ✎ ערוך
+            </button>
+            <button class="btn-icon delete" (click)="onDelete(product.productId, product.productName)" title="מחיקה">
+               🗑
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="edit-modal-overlay" *ngIf="isEditMode" (click)="isEditMode = false">
+    <div class="edit-modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2>עריכת מוצר: {{selectedProduct?.productName}}</h2>
+        <button class="close-btn" (click)="isEditMode = false">&times;</button>
+      </div>
+
+      <form [formGroup]="productForm" (ngSubmit)="saveChanges()" class="admin-form">
+        
+        <div class="form-section">
+          <h3>פרטים בסיסיים</h3>
+          <div class="input-group">
+            <label>שם המוצר</label>
+            <input type="text" formControlName="productName">
+          </div>
+          
+          <div class="row">
+            <div class="input-group">
+              <label>מחיר (₪)</label>
+              <input type="number" formControlName="productPrice">
+            </div>
+            <div class="input-group">
+              <label>צבע</label>
+              <input type="text" formControlName="color">
+            </div>
+          </div>
+          <div class="input-group">
+              <label>קטגוריה</label>
+              <select formControlName="categoryId">
+                <option [value]="1">טבעות</option>
+                <option [value]="2">עגילים</option>
+                <option [value]="3">שרשראות</option>
+                <option [value]="4">צמידים</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+          <h3>תיאור ותוכן</h3>
+          <div class="input-group">
+            <label>תיאור קצר (יופיע בקטלוג)</label>
+            <input type="text" formControlName="shortDescription">
+          </div>
+          <div class="input-group">
+            <label>תיאור מורחב</label>
+            <textarea formControlName="longDescription" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>שיוך וקטגוריות (Booleans)</h3>
+          <div class="checkbox-grid">
+            <label class="check-item">
+              <input type="checkbox" formControlName="isClassic">
+              <span>Classic Collection</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" formControlName="isTrendy">
+              <span>Trendy</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" formControlName="isPearls">
+              <span>Pearls</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" formControlName="isStudio">
+              <span>Studio Design</span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" formControlName="justOnline">
+              <span>בלעדי לאתר</span>
+            </label>
+          </div>
+        </div>
+
+
+        <div class="form-section">
+          <h3>ניהול מלאי ומידות</h3>
+          <div formArrayName="sizes">
+            <div *ngFor="let size of sizes.controls; let i=index" [formGroupName]="i" class="row size-row">
+              <div class="input-group">
+                <label>מידה / אורך</label>
+                <input type="number" formControlName="productSize" placeholder="לדוג' 54">
+              </div>
+              <div class="input-group">
+                <label>כמות במלאי</label>
+                <input type="number" formControlName="amount">
+              </div>
+              <button type="button" class="btn-remove" (click)="removeSize(i)">🗑</button>
+            </div>
+          </div>
+          <button type="button" class="btn-secondary" (click)="addSize()">+ הוסף מידה/אורך</button>
+        </div>
+
+
+            <div class="form-section">
+        <h3>מדיה (תמונות המוצר)</h3>
+        <div class="image-upload-grid">
+            
+            <div class="upload-box">
+            <label>תמונה ראשית</label>
+            <div class="preview-area">
+                <img [src]="productForm.get('image1')?.value || 'pictures/ring1.png'" alt="preview">
+                <input type="file" (change)="onFileSelected($event, 'image1')" #file1 hidden>
+                <button type="button" class="btn-upload" (click)="file1.click()">החלף תמונה</button>
+            </div>
+            </div>
+
+            <div class="upload-box">
+            <label>תמונה נוספת</label>
+            <div class="preview-area">
+                <img [src]="productForm.get('image2')?.value || 'pictures/ring2.png'" alt="preview">
+                <input type="file" (change)="onFileSelected($event, 'image2')" #file2 hidden>
+                <button type="button" class="btn-upload" (click)="file2.click()">החלף תמונה</button>
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" (click)="isEditMode = false">ביטול</button>
+          <button type="submit" class="btn-primary" [disabled]="productForm.invalid">שמור עדכונים</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
