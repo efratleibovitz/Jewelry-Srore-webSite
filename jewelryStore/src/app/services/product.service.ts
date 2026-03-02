@@ -25,6 +25,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product.model';
 
+
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private baseUrl = `${environment.apiUrl}/products`;

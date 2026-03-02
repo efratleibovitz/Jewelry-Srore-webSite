@@ -6,6 +6,7 @@ import Aura from '@primeng/themes/aura'; // ייבוא ערכת הנושא הח�
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     MessageService,
@@ -17,6 +18,7 @@ export const appConfig: ApplicationConfig = {
             preset: Aura // כאן אנחנו קובעים את העיצוב (Aura הוא העיצוב המומלץ)
         }
     }),
+
       provideRouter(
       routes,
       
@@ -26,6 +28,7 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideHttpClient()
+
 
   ]
 };

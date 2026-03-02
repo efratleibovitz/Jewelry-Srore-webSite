@@ -14,23 +14,48 @@ import { ProductPage } from './components/products/product-page/product-page';
 import { DrawerModule } from 'primeng/drawer';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { HttpClient } from '@angular/common/http';
+import { OnInit } from '@angular/core';
+
 import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule,ToastModule],
+
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit{
   protected readonly title = signal('JewelryStore');
   cartVisible = false;
   userVisible=false;
   cartItems: any[] = [];
-    constructor(private cartStorage: CartStorage) {}
+  constructor(
+      private cartStorage: CartStorage,
+      private http: HttpClient 
+    ) {}
+  // ngOnInit(): void {
+  //   this.cartStorage.ensureCartInitialized();
+  // }
 
-  ngOnInit(): void {
+ngOnInit(): void {
+    console.error('1. האפליקציה התחילה לעבוד!'); 
     this.cartStorage.ensureCartInitialized();
-  }
+
+    console.error('2. מנסה לשלוח בקשה לכתובת: https://localhost:44320/api/Test');
+
+    this.http.get('https://localhost:44320/api/Test').subscribe({
+        next: (data: any) => {
+            console.error('3. ✅ הצלחה! הנה המידע:', data);
+        },
+        error: (err) => {
+            console.error('3. ❌ שגיאה בחיבור:', err);
+        }
+    });
+}
+
+
 openCart() {
   this.cartItems = this.cartStorage.getCart();
   this.cartVisible = true;

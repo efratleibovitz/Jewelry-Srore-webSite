@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { AddressCard } from '../address-card/address-card';
 import { CommonModule } from '@angular/common';
 import { OrderStepper } from '../order-stepper/order-stepper';
@@ -13,15 +13,20 @@ import { OrderService } from '../../../services/order.servise';
   templateUrl: './orders-history.html',
   styleUrl: './orders-history.css',
 })
-export class OrdersHistory {
+export class OrdersHistory implements OnInit {
   //
   orders: Order[] = [];
 
   constructor(private orderService: OrderService) {}
 
-  ngOnInit() {
-    // משיכת ההזמנות מהסרוויס
-    this.orders = this.orderService.getUserOrders();
-    console.log("ההזמנות שהגיעו מהסרוויס:", this.orders);
-  }
+ngOnInit() {
+  // במקום getUserOrders הישן, קוראים ל-getAllOrders מהסרוויס המעודכן
+  this.orderService.getAllOrders().subscribe({
+    next: (data) => {
+      this.orders = data;
+      console.log("ההזמנות שהגיעו מה-DB:", this.orders);
+    },
+    error: (err) => console.error("שגיאה במשיכת היסטוריית הזמנות:", err)
+  });
+}
 }

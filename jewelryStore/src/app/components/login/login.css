@@ -9,16 +9,15 @@ body {
   color: #111;
 }
 
-/* מרכז את שתי העמודות באמת באמצע המסך */
+/* מוודא שהדיב הראשי מחלק את המקום נכון */
 .content {
-  min-height: auto;
   display: flex;
   flex-direction: row;
-  direction: rtl;
+  direction: rtl; /* ימין לשמאל */
   justify-content: center;
-  align-items: flex-start; /* כדי שלא "ימתח" למרכז אנכי מוזר */
-  gap: 48px;
-  padding: 0 24px 20px;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 40px 20px;
 }
 
 /* “כרטיס” מרובע */
@@ -31,6 +30,7 @@ body {
   /* border: 1px solid #000; */
   background: #fff;
   padding: 20px 18px 18px;
+  gap: 8px; /* יוצר מרווח פנימי אחיד בין הלייבלים לאינפוטים */
 }
 
 /* כותרת שחורה - מרובעת */
