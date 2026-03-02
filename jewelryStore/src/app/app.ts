@@ -16,10 +16,12 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core';
+import { UserService } from './services/user.service';
+// import { AdminOrders } from './components/admin-orders/admin-orders';
 @Component({
   selector: 'app-root',
   standalone: true, 
-  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule],
+  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -30,7 +32,8 @@ export class App implements OnInit{
   cartItems: any[] = [];
   constructor(
       private cartStorage: CartStorage,
-      private http: HttpClient 
+      private http: HttpClient, 
+      private userService: UserService // <--- הוספת השורה הזו
     ) {}
   // ngOnInit(): void {
   //   this.cartStorage.ensureCartInitialized();
@@ -38,6 +41,7 @@ export class App implements OnInit{
 
 ngOnInit(): void {
     console.error('1. האפליקציה התחילה לעבוד!'); 
+    this.userService.loadUserFromStorage(); // טעינת משתמש קיים מהזיכרון
     this.cartStorage.ensureCartInitialized();
 
     console.error('2. מנסה לשלוח בקשה לכתובת: https://localhost:44320/api/Test');

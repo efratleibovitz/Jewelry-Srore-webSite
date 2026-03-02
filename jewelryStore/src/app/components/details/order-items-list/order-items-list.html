@@ -1,22 +1,29 @@
 <div class="items-container">
   <div class="item-row" *ngFor="let item of items">
     
-    <div class="img-container">
-      <img [src]="item.image" [alt]="item.productName" class="product-image">    </div>
+    <div class="img-container" *ngIf="item.image">
+      <img [src]="item.image" [alt]="item.productName" class="product-image">
+    </div>
 
     <div class="item-details">
       <div class="main-info">
-        <a [routerLink]="[item.productUrl]" class="product-name">
+        <a *ngIf="item.productUrl; else textOnly" [routerLink]="[item.productUrl]" class="product-name">
           {{ item.productName }}
         </a>
-        <p class="product-meta">מידה: {{ item.size }} | כמות: {{ item.quantity }}</p>
+        <ng-template #textOnly>
+          <span class="product-name">{{ item.productName }}</span>
+        </ng-template>
+        
+        <p class="product-meta">
+          <span *ngIf="item.size">מידה: {{ item.size }} | </span>
+          כמות: {{ item.quantity }}
+        </p>
       </div>
       
-      <div class="price-area">
+      <div class="price-area" *ngIf="item.price">
         <span class="currency">₪</span>
         <span class="price-value">{{ item.price | number:'1.2-2' }}</span>
       </div>
     </div>
-
   </div>
 </div>

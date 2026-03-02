@@ -26,7 +26,7 @@ onLogin(email: string, pass: string) {
           alert(`ברוך שובך, ${user.firstName}! איזה כיף לראות אותך שוב.`);
 
           // ניווט לדף הבית (Home) במקום לפרופיל, כפי שביקשת
-          this.router.navigate(['/home']); 
+          this.router.navigate(['/profile']); 
           
           this.close();
         } else {

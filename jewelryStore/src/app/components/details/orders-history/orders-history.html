@@ -1,7 +1,7 @@
 <div class="history-page">
   <h1 class="title">ההזמנות שלי</h1>
 
-  @for (order of orders; track order.orderNumber) {
+  @for (order of orders; track order.orderId) {
     <div class="order-container">
       
       <div class="order-header">
@@ -17,10 +17,12 @@
           </div>
         </div>
 
-      <div class="total">₪{{ order.orderSum }}</div> </div>      </div>
+        <div class="total">₪{{ order.orderSum }}</div> 
+      </div>
 
-          <div class="order-content" *ngIf="order.items">        <div class="items-section">
-            <app-order-items-list [items]="order.items"></app-order-items-list>
+      <div class="order-content" *ngIf="order.orderItems && order.orderItems.length > 0">
+        <div class="items-section">
+            <app-order-items-list [items]="order.orderItems"></app-order-items-list>
         </div>
       </div>
 
@@ -31,13 +33,13 @@
           {{ order.shippingAddress.street }} {{ order.shippingAddress.houseNumber }}, 
           {{ order.shippingAddress.city }}
         </p>
-    </div>
+      </div>
       <div class="order-footer" *ngIf="!order.shippingAddress">
          <p class="casual-address">פרטי משלוח יופיעו במודל העריכה</p>
       </div>
-  }
-  <!-- } @empty {
+    </div> } @empty {
     <div class="no-orders">
       <p>עדיין לא בוצעו הזמנות בחשבון זה.</p>
     </div>
-  } -->
+  }
+</div>

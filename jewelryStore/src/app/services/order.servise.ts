@@ -1,38 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Order, OrderStatus } from '../models/order.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class OrderService {
-  // המידע שהעברנו מהקומפוננטה לסרוויס
-  private userOrders: Order[] = [
-    {
-        orderNumber: '111868598',
-        date: new Date('2026-02-19'),
-        status: OrderStatus.Shipped, // סטטוס 3 - נשלח
-        totalAmount: 139.00,
-        items: [
-            {
-                id: 1,
-                productName: 'טבעת כסף 925 בצורת עלים',
-                price: 139.00,
-                image: 'pictures/ring1.png',  // <-- Use single image
-                quantity: 1,
-                productUrl: '/product/R29991SZ'
-            }
-        ],
-        shippingAddress: {
-            fullName: 'ישראלה ישראלי',
-            city: 'תל אביב',
-            street: 'דיזינגוף',
-            houseNumber: '100',
-            isDefault: true
-        },
-        id: ''
-    }
-  ];
 
-  // פונקציה שמאפשרת לקומפוננטה לקבל את ההזמנות
-  getUserOrders(): Order[] {
-    return this.userOrders;
+  private apiUrl = 'https://localhost:44320/api/Orders';
+  constructor(private http: HttpClient) { }
+  // המידע שהעברנו מהקומפוננטה לסרוויס
+ 
+  getAllOrders(): Observable<Order[]> {
+      return this.http.get<Order[]>(this.apiUrl);
   }
+  // // פונקציה שמאפשרת לקומפוננטה לקבל את ההזמנות
+  // getUserOrders(): Order[] {
+  //   return this.userOrders;
+  // }
+
+  updateOrderStatus(orderId: number, newStatus: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${orderId}/status`, newStatus);
+  }
+
+  getUserOrders(userId: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`);
+  }
+  getOrdersByUserId(userId: number): Observable<Order[]> {
+  // פנייה לנתיב: https://localhost:44320/api/Orders/user/{userId}
+  return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`);
+}
 }

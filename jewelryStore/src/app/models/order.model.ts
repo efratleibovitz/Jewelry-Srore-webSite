@@ -9,13 +9,14 @@ export enum OrderStatus {
 
 // ממשק לפריט בודד (טבעת, עגילים וכו')
 export interface OrderItem {
-  id: number;
+  orderId: number;
   productName: string;
-  price: number;
-  image: string;
-  size?: string;
   quantity: number;
-  productUrl: string;
+  // השדות הבאים יגיעו כרגע כ-undefined אלא אם תוסיפי אותם ב-DTO בשרת:
+  price?: number; 
+  image?: string;
+  size?: string;
+  productUrl?: string;
 }
 
 // ממשק לכתובת
@@ -29,11 +30,25 @@ export interface Address {
 
 // הממשק הראשי של ההזמנה
 export interface Order {
-  id: string;
-  orderNumber: string;
-  date: Date;
-  status: OrderStatus;
-  items: OrderItem[];
-  shippingAddress: Address;
-  totalAmount: number;
+  orderId: number;      // במקום id
+  userId: number;       // מזהה המשתמש מה-DB
+  orderDate: string;      // במקום date
+  status: number;  // נשאר אותו דבר
+  orderSum: number;     // במקום totalAmount
+  
+  // השדות האלו כרגע אופציונליים כי הם לא קיימים ב-OrderDto הבסיסי ששלחת
+  orderNumber?: string; 
+  items?: OrderItem[];
+  shippingAddress?: Address;
+  // orderItems: OrderItemDto[];
+  orderItems: OrderItem[]
 }
+
+
+export interface OrderItemDto {
+  orderId: number;
+  quantity: number;
+  productName: string;
+  // אם את רוצה להציג תמונה ומחיר, תצטרכי להוסיף אותם גם ב-OrderItemDto ב-C#
+}
+
