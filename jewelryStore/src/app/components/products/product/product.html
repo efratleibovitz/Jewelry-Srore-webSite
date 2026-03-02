@@ -1,27 +1,91 @@
-<div class="product-card">
+<!-- <div class="product-card">
 
   <div class="img-wrap" [routerLink]="['/product', product.id]" style="cursor: pointer;">
-    <img [src]="product.imageUrl" [alt]="product.name" />
+    <img [src]="'/' + (product.image1?.trim() ?? '')" [alt]="product.productName" />
   </div>
 
   <div class="content">
-    <h3 class="name" [routerLink]="['/product', product.id]" style="cursor: pointer;">
-      {{ product.name }}
+    <h3 class="name" [routerLink]="['/product', product.productId]" style="cursor: pointer;">
+      {{ product.productName }}
     </h3>
-    <p class="desc">{{  product.description }}</p>
+
+    <p class="desc">{{ product.shortDescription }}</p>
 
     <div class="bottom-row">
-      <span class="price">{{ product.price }} ₪</span>
+      <span class="price">{{ product.productPrice }} ₪</span>
+
       <div class="success-msg" *ngIf="added">
-             נוסף לסל בהצלחה ✔
+        נוסף לסל בהצלחה ✔
       </div>
-      <!-- <button class="btn">הוספה</button> -->
+
       <button class="icon-btn" (click)="addToCart()">
         <i class="pi pi-shopping-bag"></i>
       </button>
     </div>
   </div>
 
+</div> -->
+<div class="product-card">
 
+  <!-- <div class="img-wrap" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+    <img [src]="'/' + (product.image1?.trim() ?? '')" [alt]="product.name" />
+  </div> -->
+<div class="img-wrap" [routerLink]="['/product', (product.id ?? product.productId)]" style="cursor:pointer;">
+  <img [src]="'/' + (product.image1?.trim() ?? '')" [alt]="product.name ?? product.productName" />
 </div>
 
+  <div class="content">
+    <h3 class="name" [routerLink]="['/product', product.id]" style="cursor: pointer;">
+      {{ product.productName }}
+    </h3>
+
+    <p class="desc">{{ product.shortDescription }}</p>
+
+    <div class="bottom-row">
+      <span class="price">{{ product.productPrice }} ₪</span>
+
+      <!-- <div class="success-msg" *ngIf="added">
+        נוסף לסל בהצלחה ✔
+      </div> -->
+
+      <button class="icon-btn" (click)="addToCart(); $event.stopPropagation()">
+        <i class="pi pi-shopping-bag"></i>
+      </button>
+    </div>
+  </div>
+<!-- <div class="error-msg" *ngIf="errorMsg">
+  {{ errorMsg }}
+</div> -->
+
+<p-dialog
+  header="בחרי מידה"
+  [(visible)]="sizeDialogVisible"
+  [modal]="true"
+  appendTo="body"
+  [style]="{ width: '420px' }"
+>
+  <div class="sizes-container">
+    <button
+      type="button"
+      class="size-btn"
+      *ngFor="let s of sizeOptions"
+      [class.selected]="selectedSize === s.size"
+      (click)="selectedSize = s.size"
+    >
+      {{ s.size }}
+    </button>
+  </div>
+
+  <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:16px;">
+    <button type="button" class="btn" (click)="sizeDialogVisible=false">ביטול</button>
+    <button
+      type="button"
+      class="btn primary"
+      [disabled]="selectedSize === null"
+      (click)="confirmSize()"
+    >
+      הוספה לסל
+    </button>
+  </div>
+</p-dialog>
+</div>

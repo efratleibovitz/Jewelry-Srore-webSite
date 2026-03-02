@@ -13,11 +13,11 @@ import { ProductPageService } from '../../services/productPage.service';
   styleUrl: './product-page.css',
 })
 
-export class ProductPage implements OnInit {
+export class ProductPageOld implements OnInit {
   allProducts: Product[] = [];
   constructor(private productService: ProductService,private router: Router,) {}
 
   ngOnInit() {
-    this.allProducts = this.productService.getProducts();
+    // this.allProducts = this.productService.getProducts();
   }
 }

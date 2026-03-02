@@ -7,11 +7,14 @@
     <div *ngFor="let item of cartItems" class="cart-item">
 
   <!-- ימין: תמונה -->
-        <img class="thumb" [src]="item.imageUrl" [alt]="item.name" />
+        <img class="thumb" [src]="item.image1" [alt]="item.productName" />
 
   <!-- שמאל לתמונה: תוכן -->
         <div class="content">
-            <div class="name">{{ item.name }}</div>
+            <div class="name">{{ item.productName }}</div>
+            <div class="item-variant" *ngIf="item.size">
+  מידה {{ item.size }}
+</div>
             <div class="qty">
             <button pButton type="button" class="qty-btn" icon="pi pi-minus"
                     (click)="dec(item)" [disabled]="item.quantity <= 1"></button>
@@ -20,9 +23,10 @@
 
             <button pButton type="button" class="qty-btn" icon="pi pi-plus"
                     (click)="inc(item)"></button>
+                    <!-- <button pButton type="button" class="qty-btn" icon="pi pi-plus" (click)="inc(item)" [disabled]="item.quantity >= item.maxAmount"></button> -->
             </div>
 
-            <div class="price">{{ item.price * item.quantity }} ₪</div>
+            <div class="price">{{ item.productPrice * item.quantity }} ₪</div>
         </div>
 
   <!-- פח בפינה שמאלית למטה -->

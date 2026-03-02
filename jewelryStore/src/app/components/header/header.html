@@ -21,11 +21,13 @@
 <nav class="nav-menu">
   <ul>
     <li><a routerLink="/shop">כל התכשיטים</a></li>
-    <li><a routerLink="/shop">שרשראות</a></li>
-    <li><a routerLink="/shop">עגילים</a></li>
-    <li><a routerLink="/shop">צמידים</a></li>
-    <li><a routerLink="/shop">טבעות</a></li>
-    <li><a routerLink="/shop">עיצוב אישי</a></li>
+
+    <li><a [routerLink]="['/shop']" [queryParams]="{ categoryId: 1 }">שרשראות</a></li>
+    <li><a [routerLink]="['/shop']" [queryParams]="{ categoryId: 4 }">עגילים</a></li>
+    <li><a [routerLink]="['/shop']" [queryParams]="{ categoryId: 2 }">צמידים</a></li>
+    <li><a [routerLink]="['/shop']" [queryParams]="{ categoryId: 3 }">טבעות</a></li>
+
+    <li><a [routerLink]="['/shop']" [queryParams]="{ isStudio: true }">עיצוב אישי</a></li>
   </ul>
 </nav>
 </header>

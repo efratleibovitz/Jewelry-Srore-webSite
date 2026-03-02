@@ -1,18 +1,15 @@
 <div dir="rtl">
-<div class="topbar">
- <button class="filterPill" type="button" (click)="openOptions()">
-  
-
-  <svg class="sliderIcon" viewBox="0 0 48 24" aria-hidden="true">
-    <line x1="6" y1="7" x2="30" y2="7"></line>
-    <circle cx="33" cy="7" r="3.5"></circle>
-
-    <line x1="9" y1="17" x2="33" y2="17"></line>
-    <circle cx="6" cy="17" r="3.5"></circle>
-  </svg>
-  <span class="filterText">סינון / מיון</span>
-</button>
-</div>
+  <div class="topbar">
+    <button class="filterPill" type="button" (click)="openOptions()">
+      <svg class="sliderIcon" viewBox="0 0 48 24" aria-hidden="true">
+        <line x1="6" y1="7" x2="30" y2="7"></line>
+        <circle cx="33" cy="7" r="3.5"></circle>
+        <line x1="9" y1="17" x2="33" y2="17"></line>
+        <circle cx="6" cy="17" r="3.5"></circle>
+      </svg>
+      <span class="filterText">סינון / מיון</span>
+    </button>
+  </div>
 
   <app-product-arr [products]="viewProducts"></app-product-arr>
 
@@ -20,7 +17,6 @@
     <div class="overlay" (click)="closeOptions()"></div>
 
     <aside class="panel" (click)="$event.stopPropagation()">
-
       <div class="panel-header">
         <button class="xbtn" type="button" (click)="closeOptions()">✕</button>
         <div class="title">סינון / מיון</div>
@@ -77,82 +73,75 @@
             </label>
           </div>
         }
-<button class="accRow" type="button" (click)="toggleStyle()">
-  <span>סגנון</span>
-  <span class="plus">{{ isStyleOpen ? '−' : '+' }}</span>
-</button>
 
-@if (isStyleOpen) {
-  <div class="accBody">
-    
-    <label class="radio">
-      <input type="radio" name="style"
-             [checked]="selectedStyle==='classic'"
-             (change)="selectedStyle='classic'">
-      <span>קלאסי</span>
-    </label>
+        <!-- סגנון -->
+        <button class="accRow" type="button" (click)="toggleStyleSection()">
+          <span>סגנון</span>
+          <span class="plus">{{ isStyleOpen ? '−' : '+' }}</span>
+        </button>
 
-    <label class="radio">
-      <input type="radio" name="style"
-             [checked]="selectedStyle==='trendy'"
-             (change)="selectedStyle='trendy'">
-      <span>טרנדי</span>
-    </label>
+        @if (isStyleOpen) {
+          <div class="accBody">
+            <label class="circle">
+              <input type="checkbox"
+                     [checked]="selectedStyles.includes('classic')"
+                     (change)="toggleStyleChoice('classic')">
+              <span>קלאסי</span>
+            </label>
 
-    <label class="radio">
-      <input type="radio" name="style"
-             [checked]="selectedStyle==='pearls'"
-             (change)="selectedStyle='pearls'">
-      <span>פנינים</span>
-    </label>
+            <label class="circle">
+              <input type="checkbox"
+                     [checked]="selectedStyles.includes('trendy')"
+                     (change)="toggleStyleChoice('trendy')">
+              <span>טרנדי</span>
+            </label>
 
-    <label class="radio">
-      <input type="radio" name="style"
-             [checked]="selectedStyle==='studio'"
-             (change)="selectedStyle='studio'">
-      <span>סטודיו</span>
-    </label>
+            <label class="circle">
+              <input type="checkbox"
+                     [checked]="selectedStyles.includes('pearls')"
+                     (change)="toggleStyleChoice('pearls')">
+              <span>פנינים</span>
+            </label>
 
-</div>
-}
-<button class="accRow" type="button" (click)="toggleCategory()">
-  <span>קטגוריה</span>
-  <span class="plus">{{ isCategoryOpen ? '−' : '+' }}</span>
-</button>
+            <label class="circle">
+              <input type="checkbox"
+                     [checked]="selectedStyles.includes('studio')"
+                     (change)="toggleStyleChoice('studio')">
+              <span>סטודיו</span>
+            </label>
+          </div>
+        }
 
-@if (isCategoryOpen) {
-  <div class="accBody">
+        <!-- קטגוריה -->
+        <button class="accRow" type="button" (click)="toggleCategory()">
+          <span>קטגוריה</span>
+          <span class="plus">{{ isCategoryOpen ? '−' : '+' }}</span>
+        </button>
 
-    <label class="radio">
-      <input type="radio" name="category"
-             [checked]="selectedCategory==='necklaces'"
-             (change)="selectedCategory='necklaces'">
-      <span>שרשראות</span>
-    </label>
+        @if (isCategoryOpen) {
+          <div class="accBody">
+            <label class="radio">
+              <input type="radio" name="category" [checked]="selectedCategory==='necklaces'" (change)="selectedCategory='necklaces'">
+              <span>שרשראות</span>
+            </label>
 
-    <label class="radio">
-      <input type="radio" name="category"
-             [checked]="selectedCategory==='earrings'"
-             (change)="selectedCategory='earrings'">
-      <span>עגילים</span>
-    </label>
+            <label class="radio">
+              <input type="radio" name="category" [checked]="selectedCategory==='earrings'" (change)="selectedCategory='earrings'">
+              <span>עגילים</span>
+            </label>
 
-    <label class="radio">
-      <input type="radio" name="category"
-             [checked]="selectedCategory==='bracelets'"
-             (change)="selectedCategory='bracelets'">
-      <span>צמידים</span>
-    </label>
+            <label class="radio">
+              <input type="radio" name="category" [checked]="selectedCategory==='bracelets'" (change)="selectedCategory='bracelets'">
+              <span>צמידים</span>
+            </label>
 
-    <label class="radio">
-      <input type="radio" name="category"
-             [checked]="selectedCategory==='rings'"
-             (change)="selectedCategory='rings'">
-      <span>טבעות</span>
-    </label>
+            <label class="radio">
+              <input type="radio" name="category" [checked]="selectedCategory==='rings'" (change)="selectedCategory='rings'">
+              <span>טבעות</span>
+            </label>
+          </div>
+        }
 
-  </div>
-}
         <!-- מחיר -->
         <button class="accRow" type="button" (click)="togglePrice()">
           <span>מחיר</span>
@@ -167,18 +156,12 @@
               <span>{{ priceRange[1] }}</span>
             </div>
 
-            <p-slider
-              [(ngModel)]="priceRange"
-              [range]="true"
-              [min]="minPossible"
-              [max]="maxPossible">
-            </p-slider>
+            <p-slider [(ngModel)]="priceRange" [range]="true" [min]="minPossible" [max]="maxPossible"></p-slider>
           </div>
         }
 
         <button class="primary" type="button" (click)="applyFilter()">סנן</button>
       </div>
-
     </aside>
   }
 </div>

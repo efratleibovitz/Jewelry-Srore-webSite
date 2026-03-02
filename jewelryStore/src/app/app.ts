@@ -14,10 +14,10 @@ import { ProductPage } from './components/products/product-page/product-page';
 import { DrawerModule } from 'primeng/drawer';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
-
+import { ToastModule } from 'primeng/toast';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule],
+  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule,ToastModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

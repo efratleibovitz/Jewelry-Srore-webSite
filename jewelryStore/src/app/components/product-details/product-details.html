@@ -1,4 +1,4 @@
-<div class="product-page" *ngIf="product">
+<!-- <div class="product-page" *ngIf="product">
 
   <div class="admin-floating-zone" *ngIf="isAdmin">
     <button class="edit-toggle-btn" (click)="toggleEdit()">
@@ -54,8 +54,8 @@
     </div>
 
     <div [class.disabled-area]="isEditMode">
-        
-      <div class="promo-box">
+         -->
+      <!-- <div class="promo-box">
           <span *ngIf="!isEditMode">
               {{ product?.promoText || 'קנו ב-₪150 שלמו ₪100' }}
           </span>
@@ -65,8 +65,8 @@
                 [(ngModel)]="editedProduct!.promoText" 
                 (ngModelChange)="editedProduct!.promoText = $event"
                 class="promo-edit-input">
-      </div>
-        <div class="size-selector">
+      </div> -->
+        <!-- <div class="size-selector">
             <div class="size-header-row">
                 <span class="size-label">מידה</span>
                 <span class="size-guide-link" (click)="showSizeGuide()">מדריך מידות</span>
@@ -152,4 +152,165 @@
 </p-dialog>
 
     </div>
+  </div> -->
+<!-- <div class="product-page" *ngIf="product"> -->
+
+  <!-- ------------------------------
+       מנהל/עריכה - כרגע בהערה
+  <div class="admin-floating-zone" *ngIf="isAdmin">
+    <button class="edit-toggle-btn" (click)="toggleEdit()">ערוך מוצר</button>
   </div>
+  ------------------------------ -->
+
+<div *ngIf="loading" style="padding:24px; text-align:center;">
+  טוען מוצר...
+</div>
+
+<div *ngIf="!loading && errorMsg" style="padding:24px; text-align:center;">
+  {{ errorMsg }}
+</div>
+
+<div class="product-page" *ngIf="!loading && !errorMsg && product">
+
+  <!-- ------------------------------
+       מנהל/עריכה - כרגע בהערה
+  <div class="admin-floating-zone" *ngIf="isAdmin">
+    <button class="edit-toggle-btn" (click)="toggleEdit()">ערוך מוצר</button>
+  </div>
+  ------------------------------ -->
+
+  <div class="image-section">
+
+    <!-- thumbnails רק אם יש יותר מתמונה אחת -->
+    <div class="thumbnails" *ngIf="displayImages.length > 1">
+      @for (img of displayImages; track $index; let i = $index) {
+        <img
+          [src]="'/' + img.trim()"
+          [class.active]="i === currentImgIndex"
+          (click)="setCurrentImage(i)">
+      }
+    </div>
+
+    <div class="main-display">
+
+      <button
+        class="nav-arrow left"
+        type="button"
+        (click)="prevImage()"
+        *ngIf="displayImages.length > 1">
+        <i class="pi pi-chevron-left"></i>
+      </button>
+
+      <!-- ✅ תמונה בטוחה -->
+      <img *ngIf="currentImage"
+           [src]="'/' + currentImage"
+           class="main-image">
+
+      <!-- אם אין תמונה בכלל -->
+      <div *ngIf="!currentImage" style="padding:24px; text-align:center;">
+        אין תמונה למוצר
+      </div>
+
+      <button
+        class="nav-arrow right"
+        type="button"
+        (click)="nextImage()"
+        *ngIf="displayImages.length > 1">
+        <i class="pi pi-chevron-right"></i>
+      </button>
+
+      <div class="action-icons">
+        <button class="icon-btn" type="button"><i class="pi pi-heart"></i></button>
+        <button class="icon-btn" type="button"><i class="pi pi-share-alt"></i></button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="info-section">
+
+    <h1 class="product-title">{{ product.name }}</h1>
+    <p class="product-sku">מק"ט: {{ product.id }}</p>
+    <div class="product-price">₪{{ product.price }}</div>
+
+    <p class="long-desc" *ngIf="product.longDescription as ld">{{ ld }}</p>
+
+    <!-- ✅ מידות: רק אם יש מידות עם quantity>0 -->
+    <div class="size-selector" *ngIf="hasSizes">
+      <div class="size-header-row">
+        <span class="size-label">מידה</span>
+        <span class="size-guide-link" (click)="showSizeGuide()">מדריך מידות</span>
+      </div>
+
+      <div class="sizes-container">
+        @for (s of availableSizes; track s.size) {
+          <button
+            type="button"
+            class="size-btn"
+            [class.selected]="selectedSize === s.size"
+            (click)="selectSize(s)">
+            {{ s.size }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="cart-actions">
+      <button class="add-to-cart-btn" type="button" (click)="addToCartFromDetails()" [disabled]="!isSizeSelected">
+        הוספה לסל
+      </button>
+      <input type="number" [(ngModel)]="quantity" value="1" min="1" max="10" class="quantity-input">
+    </div>
+
+    <div class="gift-option">
+      <input type="checkbox" id="giftWrap">
+      <label for="giftWrap">🎁 האם להוסיף אריזת מתנה וכרטיס ברכה? (₪10)</label>
+    </div>
+
+    <div class="product-extra-info">
+      <p-accordion [multiple]="true">
+        <p-accordion-panel value="0">
+          <p-accordion-header>מידע טכני וחומרים</p-accordion-header>
+          <p-accordion-content>
+            <ul class="info-list">
+              <li><strong>סוג המתכת:</strong> כסף סטרלינג 925</li>
+              <li><strong>אחריות:</strong> 12 חודשי אחריות על פגמי ייצור</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="1">
+          <p-accordion-header>משלוחים והחזרות</p-accordion-header>
+          <p-accordion-content>
+            <ul class="info-list">
+              <li><strong>🚚 משלוחים עד הבית :</strong> 7-10 ימי עסקים</li>
+              <li><strong>↩️ החזרות:</strong> ניתן להחזיר פריטים תוך 14 ימים מיום קבלת ההזמנה</li>
+            </ul>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+
+    <p-dialog
+      header="מדריך מידות"
+      [(visible)]="displaySizeGuide"
+      [modal]="true"
+      [style]="{width: '450px'}">
+
+      <div class="size-guide-container">
+        <table class="size-table">
+          <thead>
+            <tr><th>קוטר פנימי</th><th>אירופאית</th><th>אמריקאית</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>15.7mm</td><td>5</td><td>50</td></tr>
+            <tr><td>16.1mm</td><td>5.5</td><td>51</td></tr>
+            <tr><td>16.5mm</td><td>6</td><td>52</td></tr>
+            <tr><td>16.9mm</td><td>6.5</td><td>53</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </p-dialog>
+
+  </div>
+</div>

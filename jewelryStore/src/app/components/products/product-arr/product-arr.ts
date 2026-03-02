@@ -3,6 +3,7 @@ import { Product } from '../product/product';
 
 @Component({
   selector: 'app-product-arr',
+  standalone: true,   
   imports: [Product],
   templateUrl: './product-arr.html',
   styleUrl: './product-arr.css',

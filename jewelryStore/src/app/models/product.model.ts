@@ -1,9 +1,15 @@
 export interface Product {
-  id: string;
-  name: string;
+  id: number;
+  name: string;  
+  shortDescription: string;
   price: number;
-  description: string;
-  images: string[]; 
-  promoText?: string; // טקסט המבצע
-  availableSizes: { size: string, inStock: boolean }[]; // ניהול מלאי לפי מידה
+  image1: string;
+  categoryId?: number;
+  longDescription?: string;
+  image2?: string; 
+  sizes?: ProductSize[];  
+}
+export interface ProductSize {
+  size: number;
+  amount: number;
 }

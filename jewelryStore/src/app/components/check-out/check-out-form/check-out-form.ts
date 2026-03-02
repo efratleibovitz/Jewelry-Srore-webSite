@@ -2,7 +2,8 @@ import { Component ,Input,Output} from '@angular/core';
 import { CheckoutService } from '../../../services/checkout.service'; 
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out-form',
@@ -12,8 +13,18 @@ import { CommonModule } from '@angular/common';
 })
 export class CheckOutForm {
  currentStep = 1;
-
-  constructor(public checkoutService: CheckoutService) {}
+ orderSuccess$ ;
+ private successSub?: Subscription;
+  constructor(public checkoutService: CheckoutService,private router: Router) {
+    this.orderSuccess$ = this.checkoutService.orderSuccess;
+      this.successSub = this.orderSuccess$.subscribe(success => {
+    if (success) {
+      setTimeout(() => {
+        this.checkoutService.closeSuccessPopup();
+      }, 2500); // ⏳ נסגר אחרי 2.5 שניות
+    }
+  });
+  }
 
   nextStep(step: number) {
     // בדיקה אם השלב הקודם תקין לפני מעבר
@@ -27,4 +38,7 @@ export class CheckOutForm {
 submitOrder() {
   this.checkoutService.submitOrder();
 }
+  closeSuccess() {
+    this.checkoutService.closeSuccessPopup();
+  }
 }
