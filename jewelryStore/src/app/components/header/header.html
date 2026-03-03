@@ -7,15 +7,31 @@
      <button class="icon-btn" type="button" (click)="openuser()">
       <i class="pi pi-user"></i>
       </button>
+    <button class="icon-btn" title="החשבון שלי" routerLink="/profile">
+        <i class="pi pi-id-card"></i>
+      </button>
+
+          <ng-container *ngIf="userService.currentUser()?.isAdmin">
+    <button class="icon-btn" title="ניהול מוצרים" routerLink="/admin-products">
+      <i class="pi pi-box"></i>
+    </button>
+    <button class="icon-btn" title="ניהול הזמנות" routerLink="/admin-orders">
+      <i class="pi pi-list"></i>
+    </button>
+  </ng-container>
     </div>
     
     <div class="logo">
       <img src="pictures/logo.png" alt="Magnolia Logo">
     </div>
     
-    <div class="search-icon">
+
+
+    <div class="search-icon" routerLink="/home">
       <i class="pi pi-search"></i>
     </div>
+
+
   </div>
 
 <nav class="nav-menu">

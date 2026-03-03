@@ -17,6 +17,11 @@
   color: inherit;        /* לוקח את הצבע מה-li המקורי */
   display: block;       /* גורם לכל שטח הקישור להיות לחיץ */
 }
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* זה המרחק המדויק בין כל אייקון לאייקון */
+}
 
 .user-actions i, .search-icon i {
   font-size: 1.5rem;

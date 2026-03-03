@@ -1,16 +1,17 @@
 import { Component,Output,EventEmitter } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
-
+import { UserService } from '../../services/user.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterModule],
+  imports: [RouterLink, RouterModule, CommonModule],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header {
     @Output() openCart = new EventEmitter<void>();
-
+constructor(public userService: UserService) {}
   opencart() {
     this.openCart.emit();
   }

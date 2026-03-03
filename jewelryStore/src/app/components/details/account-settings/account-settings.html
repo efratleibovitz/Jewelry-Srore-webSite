@@ -1,4 +1,4 @@
-<div class="account-container">
+<div class="account-container" *ngIf="userService.isUserLoggedIn(); else guestNotice">
   <aside class="sidebar">
     <h3 class="sidebar-title">חשבון</h3>
     <nav class="sidebar-nav">
@@ -26,3 +26,13 @@
     <router-outlet></router-outlet>
   </main>
 </div>
+
+<ng-template #guestNotice>
+  <div class="guest-wrapper">
+    <div class="guest-card">
+      <i class="pi pi-lock"></i>
+      <h2>אזור אישי סגור</h2>
+      <p>כדי לצפות בהזמנות ובפרטים האישיים שלך, עליך להתחבר למערכת.</p>
+      </div>
+  </div>
+</ng-template>

@@ -1,5 +1,5 @@
-<div class="management-header">
-  <h2>הכתובות שלי</h2>
+<!-- <div class="management-header">
+  <h2>הפרטים האישיים שלי</h2>
   <button class="add-btn" (click)="openNewAddressForm()">+ הוספת כתובת חדשה</button>
 </div>
 
@@ -30,6 +30,51 @@
     <div class="modal-actions">
       <button class="btn-cancel" (click)="showForm = false">ביטול</button>
       <button class="btn-save" (click)="saveAddress()">שמור כתובת</button>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="management-container">
+  <div class="management-header">
+    <h2>הפרטים האישיים שלי</h2>
+    <button class="edit-main-btn" (click)="handleEdit()">עריכת פרטים</button>
+  </div>
+
+  <div class="user-details-card" *ngIf="userData">
+    <div class="info-row">
+      <span class="label">שם מלא:</span>
+      <span class="value">{{ userData.firstName }} {{ userData.lastName }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">כתובת:</span>
+      <span class="value">{{ userData.street }} {{ userData.houseNumber }}, {{ userData.city }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">טלפון:</span>
+      <span class="value">{{ userData.phone }}</span>
+    </div>
+  </div>
+
+  <div class="modal-overlay" *ngIf="showForm">
+    <div class="modal-content">
+      <h3>עריכת פרטים אישיים</h3>
+      
+      <div class="form-grid">
+        <input [(ngModel)]="userData.firstName" placeholder="שם פרטי">
+        <input [(ngModel)]="userData.lastName" placeholder="שם משפחה">
+        <input type="number" [(ngModel)]="userData.phone" placeholder="טלפון">
+        <input [(ngModel)]="userData.city" placeholder="עיר">
+        <div class="row" style="display: flex; gap: 10px;">
+          <input [(ngModel)]="userData.street" placeholder="רחוב" style="flex: 2;">
+          <input type="number" [(ngModel)]="userData.houseNumber" placeholder="מספר בית" style="flex: 1;">
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="showForm = false">ביטול</button>
+        <button class="btn-save" (click)="saveAddress()">שמור שינויים</button>
+      </div>
     </div>
   </div>
 </div>

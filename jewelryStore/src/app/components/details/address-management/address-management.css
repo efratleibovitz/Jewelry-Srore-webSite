@@ -1,17 +1,17 @@
 /* address-management.css */
-
+/* 
 .management-header {
-    position: relative;        /* מאפשר לכפתור להיצמד לשמאל יחסית לשורה */
+    position: relative;        
     display: flex;
-    justify-content: center;   /* ממרכז את הכותרת בדיוק באמצע */
-    align-items: center;       /* יישור אנכי */
+    justify-content: center;  
+    align-items: center;      
     padding: 20px 0;
     margin-bottom: 40px;
     border-bottom: 1px solid #eee;
-    min-height: 60px;          /* מבטיח גובה קבוע לשורה */
-}
+    min-height: 60px;         
+ } */
 
-.management-header h2 {
+/* .management-header h2 {
     font-size: 28px;
     font-weight: 500;
     margin: 0;
@@ -22,8 +22,8 @@
 }
 
 .add-btn {
-    position: absolute;        /* מוציא את הכפתור מהזרימה הרגילה */
-    left: 0;                   /* מצמיד אותו לשמאל הקיצוני */
+    position: absolute;       
+    left: 0;                   
     background-color: #000;
     color: #fff;
     border: none;
@@ -31,8 +31,8 @@
     font-size: 14px;
     cursor: pointer;
     transition: background 0.3s;
-}
-
+} */ 
+/* 
 .add-btn:hover {
     background-color: #333;
 }
@@ -76,7 +76,113 @@
 
 .addresses-grid {
   display: flex;
-  flex-direction: column; /* אחד מעל השני */
-  gap: 15px;             /* מרווח בין המלבנים */
+  flex-direction: column; 
+  gap: 15px;            
   margin-top: 20px;
 }
+
+
+ */
+/* מיכל ראשי */
+.management-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  direction: rtl;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.management-header h2 {
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: #333;
+}
+
+/* כפתור עריכה ראשי */
+.edit-main-btn {
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.edit-main-btn:hover {
+  background: #444;
+}
+
+/* כרטיס הפרטים */
+.user-details-card {
+  background: white;
+  padding: 30px;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border-radius: 8px;
+}
+
+.info-row {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.label {
+  width: 120px;
+  color: #999;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.value {
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* ה-Modal (העיצוב הנקי שביקשת לשמר) */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.form-grid input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-save { background: #353336; color: white; border: none; flex: 2; padding: 12px; cursor: pointer; }
+.btn-cancel { background: #f4f4f4; color: #666; border: none; flex: 1; padding: 12px; cursor: pointer; }

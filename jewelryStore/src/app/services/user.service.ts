@@ -70,4 +70,16 @@ loadUserFromStorage() {
       headers: { 'Content-Type': 'application/json' }
     });
   }
+
+updateUserFields(id: number, userData: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${id}`, userData).pipe(
+    tap(updatedInfo => {
+      const current = this.currentUser();
+      // אנחנו ממזגים את המידע החדש לתוך הקיים
+      const newData = { ...current, ...updatedInfo };
+      this.currentUser.set(newData);
+      sessionStorage.setItem('user', JSON.stringify(newData));
+    })
+  );
+}
 }

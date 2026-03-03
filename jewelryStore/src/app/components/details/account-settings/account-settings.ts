@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { UserService } from '../../../services/user.service'; // הוספנו את ה-UserService
 
 @Component({
   selector: 'app-account-settings',
@@ -10,5 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './account-settings.css',
 })
 export class AccountSettings {
+
+  constructor(public userService: UserService) {}
 
 }
