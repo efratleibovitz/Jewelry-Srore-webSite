@@ -18,7 +18,20 @@
   margin-top: 25px;
 
 }
-
+.colorimg { position: relative; z-index: 9999; }
+.color { position: relative; z-index: 9999; pointer-events: auto; }
+.colorLink {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.colorimg, .color {
+  position: relative;
+  z-index: 9999;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.colorLink:visited { color: inherit; }
 .color {
   width: 100%;
   aspect-ratio: 4 / 5;   /* שומר גובה יפה באופן דינמי */

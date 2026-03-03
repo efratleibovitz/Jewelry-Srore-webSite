@@ -1,2 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+/* ===== SUCCESS - בז' יוקרתי ===== */
+.p-toast-message-success {
+  background: #F5F1EB !important;
+  border: 1px solid #E6DED2 !important;
+  color: #5C5346 !important;
+}
+
+.p-toast-message-success .p-toast-icon-close {
+  color: #5C5346 !important;
+}
+
+.p-toast-message-success .p-toast-message-icon {
+  color: #5C5346 !important;
+}
+
+/* ===== ERROR - אפרפר ורדרד עדין ===== */
+.p-toast-message-error {
+  background: #F4F4F4 !important;
+  border: 1px solid #E3E3E3 !important;
+  color: #444 !important;
+}
+
+.p-toast-message-error .p-toast-message-icon {
+  color: #555 !important;
+}
+
+.p-toast-message-error .p-toast-icon-close {
+  color: #555 !important;
+}
+
+/* ===== טיפוגרפיה קצת יותר יוקרתית ===== */
+.p-toast .p-toast-message {
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.04);
+}
+
+.p-toast-message-summary {
+  font-weight: 600;
+}
+
+.p-toast-message-detail {
+  opacity: 0.85;
+}

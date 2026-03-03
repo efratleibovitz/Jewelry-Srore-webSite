@@ -1,7 +1,19 @@
 export interface Product {
-  id: string;
-  name: string;
+  id: number;
+  name: string;  
+  shortDescription: string;
   price: number;
+
+  image1: string;
+  categoryId?: number;
+  longDescription?: string;
+  image2?: string; 
+  sizes?: ProductSize[];  
+}
+export interface ProductSize {
+  size: number;
+  amount: number;
+
   description: string;
   images: string[]; 
   promoText?: string; // טקסט המבצע
@@ -29,4 +41,5 @@ export interface AdminProduct {
     isPearls: boolean;
     isStudio: boolean;
     sizes: Size[];
+
 }

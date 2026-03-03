@@ -242,3 +242,100 @@ textarea {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ===== Overlay ===== */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* ===== Box ===== */
+.success-box {
+  background: #ffffff;
+  padding: 50px 40px;
+  border-radius: 16px;
+  text-align: center;
+  width: 360px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.35s ease;
+}
+
+/* ===== Circle + Check ===== */
+.checkmark {
+  width: 90px;
+  height: 90px;
+  stroke-width: 2;
+  stroke: #bfa46f; /* זהב עדין */
+  stroke-miterlimit: 10;
+  box-shadow: inset 0px 0px 0px #efe6d6; /* בז׳ פנימי */
+  animation: fill 0.5s ease-in-out 0.6s forwards;
+}
+
+.checkmark-circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke: #bfa46f;
+  animation: stroke 0.7s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.4s cubic-bezier(0.65, 0, 0.45, 1) 0.9s forwards;
+}
+
+/* ===== Text ===== */
+.success-box h2 {
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: #1c1c1c;
+}
+
+/* ===== Button ===== */
+.success-box button {
+  margin-top: 30px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.success-box button:hover {
+  background: #f9d401;
+  color: #000;
+}
+
+/* ===== Animations ===== */
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 45px #efe6d6;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

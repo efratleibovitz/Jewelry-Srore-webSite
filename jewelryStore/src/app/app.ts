@@ -17,11 +17,13 @@ import { ButtonModule } from 'primeng/button';
 import { HttpClient } from '@angular/common/http';
 import { OnInit } from '@angular/core';
 import { UserService } from './services/user.service';
+import { ToastModule } from 'primeng/toast';
+  
 // import { AdminOrders } from './components/admin-orders/admin-orders';
 @Component({
   selector: 'app-root',
   standalone: true, 
-  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule  ],
+  imports: [RouterOutlet, CheckOut,PageFooter,Header,Cart,Login,ProductPage,DrawerModule,DialogModule,ButtonModule,ToastModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

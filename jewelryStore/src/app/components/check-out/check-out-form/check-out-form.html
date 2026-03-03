@@ -110,7 +110,7 @@
   
         <label class="radio-box">
             <input type="radio" formControlName="method" value="courier">
-            <span>שליח עד הבית/העבודה - עד 7 ימי עסקים ₪19.00</span>
+            <span>שליח עד הבית/העבודה - עד 7 ימי עסקים ₪30.00</span>
         </label>
 
         <label class="radio-box">
@@ -129,10 +129,10 @@
             </select>
         </div>
 
-        <label class="radio-box">
+        <!-- <label class="radio-box">
             <input type="radio" formControlName="method" value="point">
             <span>נקודת איסוף - עד 10 ימי עסקים ₪14.00</span>
-        </label>
+        </label> -->
 
         <button class="black-btn" (click)="nextStep(3)">המשך</button>
     </div>
@@ -202,5 +202,20 @@
         </div>
         </div>
     </div>
+    <div class="success-overlay" *ngIf="(orderSuccess$ | async)">
+  <div class="success-box">
+
+    <div class="checkmark-wrapper">
+      <svg viewBox="0 0 52 52" class="checkmark">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"></circle>
+        <path class="checkmark-check" fill="none" d="M14 27l7 7 16-16"></path>
+      </svg>
+    </div>
+
+    <h2>ההזמנה בוצעה בהצלחה!</h2>
+
+    <button (click)="closeSuccess()">המשך קנייה</button>
+  </div>
+</div>
 </div>
 

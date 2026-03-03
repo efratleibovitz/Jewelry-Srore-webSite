@@ -1,9 +1,21 @@
 <img class="homeimg" src="pictures/home.png" alt="homeimg">
 <app-category-item-arr></app-category-item-arr>
-<div class="colorimg">
-    <img class="color" src="pictures/silver.png" alt="silver">
-    <img class="color" src="pictures/colorfull.png" alt="colorfull">
-    <img class="color" src="pictures/gold.png" alt="gold">
+<!-- <div class="colorimg">
+    <img class="color" src="pictures/silver.png" alt="silver" (click)="goToColor('silver')">
+    <img class="color" src="pictures/colorfull.png" alt="colorfull" (click)="goToColor('colorful')">
+    <img class="color" src="pictures/gold.png" alt="gold" (click)="goToColor('gold')"
+    
+    >
+</div> -->
+<div class="colorimg" >
+  <img class="color" src="pictures/silver.png" alt="silver"
+       (click)="goToColor('silver', $event)">
+
+  <img class="color" src="pictures/colorfull.png" alt="colorfull"
+       (click)="goToColor('colorful', $event)">
+
+  <img class="color" src="pictures/gold.png" alt="gold"
+       (click)="goToColor('gold', $event)">
 </div>
 <div class="gift_card">
     <img class="gift_img" src="pictures/gift.webp" alt="gift">

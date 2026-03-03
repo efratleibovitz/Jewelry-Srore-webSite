@@ -4,9 +4,10 @@ import { ButtonModule } from 'primeng/button';
 import { CartStorage } from '../../services/cart-storage.service';
 import { CartItem } from '../../models/cart.model';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, ButtonModule],
+  imports: [CommonModule, ButtonModule,FormsModule ],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -38,8 +39,10 @@ dec(it: CartItem) { if (it.quantity > 1) it.quantity--;
   this.cartStorage.saveCart(this.cartItems);
  }
 remove(it: CartItem) { 
-    this.cartItems = this.cartItems.filter(item => item.id !== it.id);
-  this.cartStorage.removeFromCart(it.id);
+    this.cartItems = this.cartItems.filter(item => item.productId !== it.productId);
+this.cartStorage.removeFromCart(it.productId, it.size ?? null);
+   this.cartItems = this.cartStorage.getCart();
+
 }
 
 get totalItems(): number {
@@ -47,7 +50,7 @@ get totalItems(): number {
 }
 
 get totalPrice(): number {
-  return this.cartItems.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  return this.cartItems.reduce((sum, it) => sum + it.productPrice * it.quantity, 0);
 }
 
 get freeShippingEligible(): boolean {
