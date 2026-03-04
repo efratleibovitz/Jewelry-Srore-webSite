@@ -9,7 +9,8 @@ import { CheckOut } from './components/check-out/check-out/check-out';
 import { AdminOrders } from './components/admin-orders/admin-orders';
 import { AdminProducts } from './components/admin-products/admin-products';
 import { authGuard } from './services/auth.guard';
-import { About } from './components/footer/about/about';
+import { About } from './components/Footer/about/about';
+// import { About } from './components/footer/about/about';
 // import { AdminProducts } from './components/admin/admin-products/admin-products';
 // import { AdminOrders } from './components/admin/admin-orders/admin-orders';
 // import { authGuard } from './guards/auth.guard'; // נניח שיש לך guard בשם authGuard שבודק אם המשתמש מחובר לפני גישה לנתיב הפרופיל
