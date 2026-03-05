@@ -75,6 +75,27 @@ export class AdminProducts implements OnInit {
   //   this.productForm.patchValue(product);
   // }
 
+// onEdit(product: AdminProduct) {
+//   this.selectedProduct = product;
+//   this.isEditMode = true;
+//   this.sizes.clear();
+
+//   if (product.sizes && Array.isArray(product.sizes)) {
+//     product.sizes.forEach((s: any) => {
+//       // אנחנו בודקים גם אות קטנה וגם גדולה כדי לא לקחת סיכון
+//       const sizeVal = (s.productSize || s.ProductSize || '').toString(); // המרה לטקסט
+//       const amountVal = s.amount !== undefined ? s.amount : s.Amount || 0;
+      
+//       this.sizes.push(this.fb.group({
+//         productSize: [sizeVal, [Validators.required]],
+//         amount: [amountVal, [Validators.required, Validators.min(0)]]
+//       }));
+//     });
+//   }
+  
+  // אחרי שבנינו את המערך, נטען את שאר השדות
+  // this.productForm.patchValue(product);
+
 onEdit(product: AdminProduct) {
   this.selectedProduct = product;
   this.isEditMode = true;
@@ -82,9 +103,8 @@ onEdit(product: AdminProduct) {
 
   if (product.sizes && Array.isArray(product.sizes)) {
     product.sizes.forEach((s: any) => {
-      // אנחנו בודקים גם אות קטנה וגם גדולה כדי לא לקחת סיכון
-      const sizeVal = s.productSize || s.ProductSize || '';
-      const amountVal = s.amount !== undefined ? s.amount : s.Amount || 0;
+      const sizeVal = (s.productSize || s.ProductSize || '').toString(); // המרה לטקסט
+      const amountVal = s.amount !== undefined ? s.amount : (s.Amount || 0);
       
       this.sizes.push(this.fb.group({
         productSize: [sizeVal, [Validators.required]],
@@ -92,11 +112,8 @@ onEdit(product: AdminProduct) {
       }));
     });
   }
-  
-  // אחרי שבנינו את המערך, נטען את שאר השדות
   this.productForm.patchValue(product);
 }
-
 // פתיחת המודאל להוספת מוצר חדש
 
   onAddNew() {
@@ -128,7 +145,8 @@ get sizes() {
 }
 
 
-addSize(productSize: number = 0, amount: number = 0) {
+
+addSize(productSize: string = '', amount: number = 0) {
   this.sizes.push(this.fb.group({
     productSize: [productSize, [Validators.required]],
     amount: [amount, [Validators.required, Validators.min(0)]]
