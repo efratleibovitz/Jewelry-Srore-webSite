@@ -161,7 +161,7 @@
     <button class="edit-toggle-btn" (click)="toggleEdit()">ערוך מוצר</button>
   </div>
   ------------------------------ -->
-
+<p-toast></p-toast>
 <div *ngIf="loading" style="padding:24px; text-align:center;">
   טוען מוצר...
 </div>
@@ -259,7 +259,15 @@
       <button class="add-to-cart-btn" type="button" (click)="addToCartFromDetails()" [disabled]="!isSizeSelected">
         הוספה לסל
       </button>
-      <input type="number" [(ngModel)]="quantity" value="1" min="1" max="10" class="quantity-input">
+      <!-- <input type="number" [(ngModel)]="quantity" value="1" min="1" [max]="selectedSize ? (product?.sizes?.find(s => s.size === selectedSize)?.amount ?? 1) : 1" class="quantity-input"> -->
+ <input
+  type="number"
+  [(ngModel)]="quantity"
+  (ngModelChange)="onQuantityChange($event)"
+  min="1"
+  [max]="selectedSizeMax"
+  class="quantity-input"
+/>
     </div>
 
     <div class="gift-option">

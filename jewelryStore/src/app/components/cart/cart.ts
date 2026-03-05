@@ -5,9 +5,12 @@ import { CartStorage } from '../../services/cart-storage.service';
 import { CartItem } from '../../models/cart.model';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-cart',
-  imports: [CommonModule, ButtonModule,FormsModule ],
+  imports: [CommonModule, ButtonModule,FormsModule ,ToastModule],
+  providers: [MessageService],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -20,7 +23,8 @@ export class Cart {
 
   constructor(
     private cartStorage: CartStorage, 
-    private router: Router
+    private router: Router,
+    private msg: MessageService
   ) {}
   // ngOnInit(): void {
   //   this.cartItems = this.cartStorage.getCart();
@@ -32,7 +36,23 @@ export class Cart {
     this.close(); // סוגר את חלונית העגלה בזמן המעבר
   }
 
-inc(it: CartItem) { it.quantity++; 
+// inc(it: CartItem) { it.quantity++; 
+//   this.cartStorage.saveCart(this.cartItems);
+// }
+inc(it: CartItem) {
+  const max = Number(it.maxAmount ?? 0);
+
+  if (max > 0 && it.quantity >= max) {
+    this.msg.add({
+      severity: 'warn',
+      summary: 'המלאי מוגבל',
+      detail: `אפשר להזמין עד ${max} יחידות במידה הזו`,
+      life: 2200,
+    });
+    return;
+  }
+
+  it.quantity++;
   this.cartStorage.saveCart(this.cartItems);
 }
 dec(it: CartItem) { if (it.quantity > 1) it.quantity--;

@@ -285,10 +285,13 @@ import { of } from 'rxjs';
 import { ChangeDetectorRef } from '@angular/core'; // ייבוא חסר
 import { take } from 'rxjs';
 import { CartStorage } from '../../services/cart-storage.service'; // ייבוא חדש
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, DialogModule, AccordionModule, CarouselModule, FormsModule],
+  imports: [CommonModule, DialogModule, AccordionModule, CarouselModule, FormsModule, ToastModule],
+  providers: [MessageService],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
@@ -315,9 +318,14 @@ export class ProductDetails implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private cdr: ChangeDetectorRef ,// הזרקת השרות
-    private cartStorage: CartStorage
+    private cartStorage: CartStorage,
+    private msg: MessageService
   ) {}
-
+get selectedSizeMax(): number {
+  if (!this.product || this.selectedSize === null) return 1;
+  const s = this.product.sizes?.find(x => x.size === this.selectedSize);
+  return Number(s?.amount ?? 1);
+}
 //  ngOnInit(): void {
 //   this.route.paramMap
 //     .pipe(
@@ -433,6 +441,56 @@ get displayImages(): string[] {
   get isSizeSelected(): boolean {
     return !this.hasSizes || this.selectedSize !== null;
   }
+private getSelectedStock(): number {
+  const s = this.product?.sizes?.find(x => x.size === this.selectedSize);
+  return Number(s?.amount ?? 0);
+}
+private lastWarnedMax: number | null = null;
+
+onQuantityChange(val: any) {
+  let q = Number(val);
+
+  if (!Number.isFinite(q) || q < 1) q = 1;
+
+  // אם עוד לא נבחרה מידה – לא מציקים, רק שומרים כמות תקינה
+  if (this.selectedSize === null) {
+    this.quantity = q;
+    return;
+  }
+
+  const max = this.selectedSizeMax;
+
+  if (q >= max) {
+    // כדי שלא יקפוץ מיליון פעמים בזמן הקלדה
+    if (this.lastWarnedMax !== max) {
+      this.msg.add({
+        severity: 'warn',
+        summary: 'המלאי מוגבל',
+        detail: `אפשר להזמין עד ${max} יחידות במידה הזו`,
+        life: 2200,
+      });
+      this.lastWarnedMax = max;
+    }
+    this.quantity = max;
+    return;
+  }
+
+  this.lastWarnedMax = null;
+  this.quantity = q;
+}
+selectSize(s: ProductSize): void {
+  this.selectedSize = s.size;
+
+  if (this.quantity >= this.selectedSizeMax) {
+    this.msg.add({
+      severity: 'warn',
+      summary: 'המלאי מוגבל',
+      detail: `במידה הזו אפשר עד ${this.selectedSizeMax} יחידות`,
+      life: 2200,
+    });
+    this.quantity = this.selectedSizeMax;
+  }
+}
 
   nextImage(): void {
     const imgs = this.displayImages;
@@ -452,9 +510,9 @@ get displayImages(): string[] {
     this.currentImgIndex = index;
   }
 
-  selectSize(s: ProductSize): void {
-    this.selectedSize = s.size;
-  }
+  // selectSize(s: ProductSize): void {
+  //   this.selectedSize = s.size;
+  // }
 
   showSizeGuide(): void {
     this.displaySizeGuide = true;
@@ -474,7 +532,17 @@ addToCartFromDetails() {
     this.errorMsg = 'בחרי מידה לפני הוספה לסל';
     return;
   }
-
+const stock = this.getSelectedStock();
+if (this.quantity > stock) {
+  this.msg.add({
+    severity: 'warn',
+    summary: 'המלאי מוגבל',
+    detail: `נשארו רק ${stock} יחידות במידה הזו`,
+    life: 2500,
+  });
+  this.quantity = stock; // לא חובה, אבל מומלץ שיתאים אוטומטית
+  return;
+}
   this.cartStorage.addToCart(this.product, this.quantity, this.selectedSize);
 }
 }

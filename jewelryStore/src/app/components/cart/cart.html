@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="cart">
     <div class="header">
         <h2 class="title">סל הקניות שלי</h2>
@@ -21,8 +22,16 @@
 
             <span class="qty-num">{{ item.quantity }}</span>
 
-            <button pButton type="button" class="qty-btn" icon="pi pi-plus"
-                    (click)="inc(item)"></button>
+            <!-- <button pButton type="button" class="qty-btn" icon="pi pi-plus"
+                    (click)="inc(item)"></button> -->
+            <button
+                pButton
+                type="button"
+                class="qty-btn"
+                icon="pi pi-plus"
+                (click)="inc(item)"
+                [disabled]="item.maxAmount > 0 && item.quantity >= item.maxAmount+1">
+              </button>
                     <!-- <button pButton type="button" class="qty-btn" icon="pi pi-plus" (click)="inc(item)" [disabled]="item.quantity >= item.maxAmount"></button> -->
             </div>
 
