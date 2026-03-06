@@ -40,9 +40,15 @@ export class Cart {
 //   this.cartStorage.saveCart(this.cartItems);
 // }
 inc(it: CartItem) {
+    console.log('CART ITEM:', it);
+  console.log('quantity:', it.quantity);
+  console.log('maxAmount field:', it.maxAmount);
+  console.log('calculated max:', Number(it.maxAmount ?? 0));
+
   const max = Number(it.maxAmount ?? 0);
 
   if (max > 0 && it.quantity >= max) {
+     console.log('BLOCKED - reached max', { quantity: it.quantity, max });
     this.msg.add({
       severity: 'warn',
       summary: 'המלאי מוגבל',
