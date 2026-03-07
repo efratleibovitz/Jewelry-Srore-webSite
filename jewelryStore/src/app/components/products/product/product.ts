@@ -3,12 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { DialogModule } from 'primeng/dialog';
 import { MessageService } from 'primeng/api';
-
 import { take } from 'rxjs';
-
 import { CartStorage } from '../../../services/cart-storage.service';
 import { ProductService } from '../../../services/product.service';
 
@@ -39,14 +36,23 @@ export class Product {
     private msg: MessageService
   ) {}
 
-  private getAvailableSizes(p: any): { size: number; amount: number }[] {
-    const sizes = (p?.sizes ?? []) as any[];
-    return sizes
-      .map(s => ({ size: Number(s.size), amount: Number(s.amount ?? 0) }))
-      .filter(s => Number.isFinite(s.size) && s.amount > 0);
-  }
-
+  // private getAvailableSizes(p: any): { size: number; amount: number }[] {
+  //   const sizes = (p?.sizes ?? []) as any[];
+  //   return sizes
+  //     .map(s => ({ size: Number(s.size), amount: Number(s.amount ?? 0) }))
+  //     .filter(s => Number.isFinite(s.size) && s.amount > 0);
+  // }
+private getAvailableSizes(p: any): { size: number; amount: number }[] {
+  const sizes = (p?.sizes ?? []) as any[];
+  return sizes
+    .map(s => ({
+      size: Number(s.productSize ?? s.ProductSize ?? s.size),
+      amount: Number(s.amount ?? s.Amount ?? 0),
+    }))
+    .filter(x => Number.isFinite(x.size) && x.amount > 0);
+}
   addToCart(): void {
+ 
     const productId = Number(this.product?.id ?? this.product?.productId);
     if (!productId) return;
 
@@ -58,7 +64,12 @@ export class Product {
 
     // אחרת: מביאים מוצר מלא מהשרת (עם sizes)
     this.productService.getProductById(productId).pipe(take(1)).subscribe({
-      next: (fullProduct: any) => this.handleSizesAndAdd(fullProduct),
+      
+      next: (fullProduct: any) => {
+  
+    this.handleSizesAndAdd(fullProduct);
+  },
+
       error: () => {
         this.msg.add({
           severity: 'error',
@@ -71,6 +82,7 @@ export class Product {
   }
 
   private handleSizesAndAdd(p: any): void {
+
     const avail = this.getAvailableSizes(p);
 
     // 1) אין מידות זמינות

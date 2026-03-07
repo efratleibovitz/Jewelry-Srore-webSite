@@ -434,6 +434,214 @@
 //     this.loadProductsFromApi();
 //     this.closeOptions();
 //   }
+// // }
+// import { Component } from '@angular/core';
+// import { ProductPageService } from '../../../services/productPage.service';
+// import { ProductArr } from '../product-arr/product-arr';
+// import { Header } from '../../header/header';
+// import { SliderModule } from 'primeng/slider';
+// import { FormsModule } from '@angular/forms';
+// import { CommonModule } from '@angular/common';
+// import { ActivatedRoute } from '@angular/router';
+// import { ChangeDetectorRef } from '@angular/core';
+
+// @Component({
+//   selector: 'app-product-page',
+//   imports: [CommonModule, FormsModule, SliderModule, Header, ProductArr],
+//   templateUrl: './product-page.html',
+//   styleUrl: './product-page.css',
+// })
+// export class ProductPage {
+//   viewProducts: any[] = [];
+
+//   // UI states
+//   isOptionsOpen = false;
+//   isColorOpen = false;
+//   isPriceOpen = false;
+//   isStyleOpen = false;
+//   isCategoryOpen = false;
+
+//   // filters (UI)
+//   sortValue: 'price_asc' | 'price_desc' | 'new' | null = null;
+//   selectedColor: 'silver' | 'gold' | 'colorful' | null = null;
+//   selectedStyles: string[] = [];
+//   selectedCategory: 'necklaces' | 'earrings' | 'bracelets' | 'rings' | null = null;
+
+//   priceRange: number[] = [0, 3000];
+//   minPossible = 0;
+//   maxPossible = 3000;
+
+//   pagedProducts: any[] = [];
+// currentPage: number = 1; // ערך ברירת מחדל
+
+//   // מה שיגיע מה-Header / URL
+//   categoryIdFromUrl: number | null = null;
+//   studioFromUrl: boolean | null = null;
+
+//   // ✅ חובה להתאים ל-CategoryId אמיתי אצלך
+//   private categoryMap: Record<'necklaces' | 'earrings' | 'bracelets' | 'rings', number> = {
+//     necklaces: 1,
+//     earrings: 4,
+//     bracelets: 2,
+//     rings: 3,
+//   };
+
+//   constructor(
+//     private productPageService: ProductPageService,
+//     private route: ActivatedRoute,
+//     private cdr: ChangeDetectorRef
+//   ) {}
+
+//   private colorToHebrew(c: 'silver' | 'gold' | 'colorful' | null): string | null {
+//     if (!c) return null;
+//     if (c === 'silver') return 'כסף';
+//     if (c === 'gold') return 'זהב';
+//     return 'צבעוני';
+//   }
+
+//   private hasStyle(style: string): boolean {
+//     return this.selectedStyles.includes(style);
+//   }
+
+//   private getCategoryIdForQuery(): number | null {
+//     // אם הגיע מה-URL זה קודם
+//     if (this.categoryIdFromUrl !== null) return this.categoryIdFromUrl;
+
+//     // אחרת לפי הבחירה בפאנל
+//     if (!this.selectedCategory) return null;
+//     return this.categoryMap[this.selectedCategory] ?? null;
+//   }
+
+//   ngOnInit(): void {
+//     this.route.queryParamMap.subscribe(params => {
+//       const cid = params.get('categoryId');
+//       this.categoryIdFromUrl = cid ? Number(cid) : null;
+
+//       const studio = params.get('isStudio');
+//       this.studioFromUrl = studio === null ? null : (studio === 'true' || studio === '1');
+
+//       const color = params.get('color');
+//       this.selectedColor =
+//         color === 'silver' || color === 'gold' || color === 'colorful'
+//           ? color
+//           : null;
+
+//       this.loadProductsFromApi();
+//     });
+//   }
+// //   ngOnInit(): void {
+// //   this.route.queryParamMap.subscribe(params => {
+// //     // 1. קודם כל - איפוס סינונים קודמים כדי שלא תהיה התנגשות
+// //     this.selectedCategory = null; 
+// //     this.selectedStyles = [];
+// //     this.selectedColor = null;
+
+// //     // 2. שליפת הנתונים מה-URL החדש
+// //     const cid = params.get('categoryId');
+// //     this.categoryIdFromUrl = cid ? Number(cid) : null;
+
+// //     const studio = params.get('isStudio');
+// //     this.studioFromUrl = (studio === 'true' || studio === '1');
+
+// //     // 3. טעינת המוצרים
+// //     this.loadProductsFromApi();
+// //   });
+// // }
+
+//   // loadProductsFromApi() {
+//   //   const query = this.buildApiQuery();
+//   //   this.productPageService.getProductsFromApi(query).subscribe({
+//   //     next: products => (this.viewProducts = products),
+//   //     error: err => console.error('Failed to load products', err),
+//   //   });
+//   // }
+// loadProductsFromApi() {
+//   const query = this.buildApiQuery();
+//   this.productPageService.getProductsFromApi(query).subscribe({
+//     next: (products) => {
+//       // ה-DB שלח מוצרים? אנחנו פשוט מציגים אותם
+//       this.viewProducts = products;
+//       this.pagedProducts = products; 
+
+//       // אומרים לאנגולר לצייר אותם מיד
+//       this.cdr.detectChanges();
+//     },
+//     error: (err) => console.error(err),
+//   });
+// }
+
+//   private buildApiQuery() {
+//     const sortMode =
+//       this.sortValue === 'price_asc' ? 'low_to_high' :
+//       this.sortValue === 'price_desc' ? 'high_to_low' :
+//       this.sortValue === 'new' ? 'date' :
+//       null;
+
+//     return {
+//       categoryId: this.getCategoryIdForQuery(),
+//       color: this.colorToHebrew(this.selectedColor),
+//       minPrice: this.priceRange?.[0] ?? null,
+//       maxPrice: this.priceRange?.[1] ?? null,
+//       justOnline: null,
+
+//       isClassic: this.hasStyle('classic') ? true : null,
+//       isTrendy: this.hasStyle('trendy') ? true : null,
+//       isPearls: this.hasStyle('pearls') ? true : null,
+
+//       // URL קודם (אם הגיע מהheader), אחרת לפי בחירה בפאנל
+//       isStudio: this.studioFromUrl ?? (this.hasStyle('studio') ? true : null),
+
+//       sortMode
+//     };
+//   }
+
+//   // UI functions
+//   openOptions() {
+//     this.isOptionsOpen = true;
+//     document.body.style.overflow = 'hidden';
+//   }
+
+//   closeOptions() {
+//     this.isOptionsOpen = false;
+//     document.body.style.overflow = '';
+//   }
+
+//   toggleColor() { this.isColorOpen = !this.isColorOpen; }
+//   togglePrice() { this.isPriceOpen = !this.isPriceOpen; }
+//   toggleStyleSection() { this.isStyleOpen = !this.isStyleOpen; }
+//   toggleCategory() { this.isCategoryOpen = !this.isCategoryOpen; }
+
+//   toggleStyleChoice(style: string) {
+//     if (this.selectedStyles.includes(style)) {
+//       this.selectedStyles = this.selectedStyles.filter(s => s !== style);
+//     } else {
+//       this.selectedStyles = [...this.selectedStyles, style];
+//     }
+//   }
+
+//   applyFilter() {
+//     this.loadProductsFromApi(); // מסנן + ממיין אם נבחר מיון
+//     this.closeOptions();
+//   }
+
+//   applySort() {
+//     this.loadProductsFromApi(); // ממיין את המסונן (כי הסינון נשמר ב-state)
+//     this.closeOptions();
+//   }
+
+//   clearAll() {
+//     this.sortValue = null;
+//     this.selectedColor = null;
+//     this.selectedStyles = [];
+//     this.selectedCategory = null;
+//     this.priceRange = [0, 3000];
+
+//     // לא מאפסים URL כדי לא לשבור ניווט מה-header
+//     // this.categoryIdFromUrl = null;
+//     // this.studioFromUrl = null;
+
+//     this.loadProductsFromApi();
+//   }
 // }
 import { Component } from '@angular/core';
 import { ProductPageService } from '../../../services/productPage.service';
@@ -464,7 +672,10 @@ export class ProductPage {
   // filters (UI)
   sortValue: 'price_asc' | 'price_desc' | 'new' | null = null;
   selectedColor: 'silver' | 'gold' | 'colorful' | null = null;
+
+  // חשוב: הערכים כאן צריכים להיות: 'studio' 'pearls' 'trendy' 'classic' 'online'
   selectedStyles: string[] = [];
+
   selectedCategory: 'necklaces' | 'earrings' | 'bracelets' | 'rings' | null = null;
 
   priceRange: number[] = [0, 3000];
@@ -472,11 +683,17 @@ export class ProductPage {
   maxPossible = 3000;
 
   pagedProducts: any[] = [];
-currentPage: number = 1; // ערך ברירת מחדל
+  currentPage: number = 1;
 
   // מה שיגיע מה-Header / URL
   categoryIdFromUrl: number | null = null;
+
+  // בוליאנים שמגיעים מה-URL (דף בית)
   studioFromUrl: boolean | null = null;
+  pearlsFromUrl: boolean | null = null;
+  trendyFromUrl: boolean | null = null;
+  classicFromUrl: boolean | null = null;
+  onlineFromUrl: boolean | null = null;
 
   // ✅ חובה להתאים ל-CategoryId אמיתי אצלך
   private categoryMap: Record<'necklaces' | 'earrings' | 'bracelets' | 'rings', number> = {
@@ -512,63 +729,58 @@ currentPage: number = 1; // ערך ברירת מחדל
     return this.categoryMap[this.selectedCategory] ?? null;
   }
 
+  private parseBoolParam(v: string | null): boolean | null {
+    if (v === null) return null;
+    const x = v.trim().toLowerCase();
+    if (x === 'true' || x === '1') return true;
+    if (x === 'false' || x === '0') return false;
+    return null;
+  }
+
+  // כשמשתמש עושה סינון ידני — מבטלים את "הסינון מהבית" כדי שהחדש ינצח
+  private clearUrlBooleanFilters() {
+    this.studioFromUrl = null;
+    this.pearlsFromUrl = null;
+    this.trendyFromUrl = null;
+    this.classicFromUrl = null;
+    this.onlineFromUrl = null;
+  }
+
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(params => {
+      // URL -> categoryId
       const cid = params.get('categoryId');
       this.categoryIdFromUrl = cid ? Number(cid) : null;
 
-      const studio = params.get('isStudio');
-      this.studioFromUrl = studio === null ? null : (studio === 'true' || studio === '1');
+      // URL -> booleans
+      this.studioFromUrl = this.parseBoolParam(params.get('isStudio'));
+      this.pearlsFromUrl = this.parseBoolParam(params.get('isPearls'));
+      this.trendyFromUrl = this.parseBoolParam(params.get('isTrendy'));
+      this.classicFromUrl = this.parseBoolParam(params.get('isClassic'));
+      this.onlineFromUrl = this.parseBoolParam(params.get('justOnline'));
 
+      // URL -> color (אם שלחת מהבית)
       const color = params.get('color');
       this.selectedColor =
         color === 'silver' || color === 'gold' || color === 'colorful'
           ? color
           : null;
-
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       this.loadProductsFromApi();
     });
   }
-//   ngOnInit(): void {
-//   this.route.queryParamMap.subscribe(params => {
-//     // 1. קודם כל - איפוס סינונים קודמים כדי שלא תהיה התנגשות
-//     this.selectedCategory = null; 
-//     this.selectedStyles = [];
-//     this.selectedColor = null;
 
-//     // 2. שליפת הנתונים מה-URL החדש
-//     const cid = params.get('categoryId');
-//     this.categoryIdFromUrl = cid ? Number(cid) : null;
-
-//     const studio = params.get('isStudio');
-//     this.studioFromUrl = (studio === 'true' || studio === '1');
-
-//     // 3. טעינת המוצרים
-//     this.loadProductsFromApi();
-//   });
-// }
-
-  // loadProductsFromApi() {
-  //   const query = this.buildApiQuery();
-  //   this.productPageService.getProductsFromApi(query).subscribe({
-  //     next: products => (this.viewProducts = products),
-  //     error: err => console.error('Failed to load products', err),
-  //   });
-  // }
-loadProductsFromApi() {
-  const query = this.buildApiQuery();
-  this.productPageService.getProductsFromApi(query).subscribe({
-    next: (products) => {
-      // ה-DB שלח מוצרים? אנחנו פשוט מציגים אותם
-      this.viewProducts = products;
-      this.pagedProducts = products; 
-
-      // אומרים לאנגולר לצייר אותם מיד
-      this.cdr.detectChanges();
-    },
-    error: (err) => console.error(err),
-  });
-}
+  loadProductsFromApi() {
+    const query = this.buildApiQuery();
+    this.productPageService.getProductsFromApi(query).subscribe({
+      next: (products) => {
+        this.viewProducts = products;
+        this.pagedProducts = products;
+        this.cdr.detectChanges();
+      },
+      error: (err) => console.error(err),
+    });
+  }
 
   private buildApiQuery() {
     const sortMode =
@@ -582,13 +794,13 @@ loadProductsFromApi() {
       color: this.colorToHebrew(this.selectedColor),
       minPrice: this.priceRange?.[0] ?? null,
       maxPrice: this.priceRange?.[1] ?? null,
-      justOnline: null,
 
-      isClassic: this.hasStyle('classic') ? true : null,
-      isTrendy: this.hasStyle('trendy') ? true : null,
-      isPearls: this.hasStyle('pearls') ? true : null,
+      // URL קודם (דף בית), אחרת לפי בחירה בפאנל
+      justOnline: this.onlineFromUrl ?? (this.hasStyle('online') ? true : null),
 
-      // URL קודם (אם הגיע מהheader), אחרת לפי בחירה בפאנל
+      isClassic: this.classicFromUrl ?? (this.hasStyle('classic') ? true : null),
+      isTrendy: this.trendyFromUrl ?? (this.hasStyle('trendy') ? true : null),
+      isPearls: this.pearlsFromUrl ?? (this.hasStyle('pearls') ? true : null),
       isStudio: this.studioFromUrl ?? (this.hasStyle('studio') ? true : null),
 
       sortMode
@@ -620,12 +832,18 @@ loadProductsFromApi() {
   }
 
   applyFilter() {
-    this.loadProductsFromApi(); // מסנן + ממיין אם נבחר מיון
+    // ✅ קריטי: ברגע שהמשתמש מסנן ידנית — מבטלים "מהבית"
+    this.clearUrlBooleanFilters();
+
+    this.loadProductsFromApi();
     this.closeOptions();
   }
 
   applySort() {
-    this.loadProductsFromApi(); // ממיין את המסונן (כי הסינון נשמר ב-state)
+    // ✅ גם מיון נחשב פעולה ידנית שמחליפה את "מהבית"
+    this.clearUrlBooleanFilters();
+
+    this.loadProductsFromApi();
     this.closeOptions();
   }
 
@@ -636,9 +854,9 @@ loadProductsFromApi() {
     this.selectedCategory = null;
     this.priceRange = [0, 3000];
 
-    // לא מאפסים URL כדי לא לשבור ניווט מה-header
-    // this.categoryIdFromUrl = null;
-    // this.studioFromUrl = null;
+    // ✅ לנקות גם את מה שהגיע מהבית, כדי לחזור ל"כל המוצרים"
+    this.categoryIdFromUrl = null;
+    this.clearUrlBooleanFilters();
 
     this.loadProductsFromApi();
   }

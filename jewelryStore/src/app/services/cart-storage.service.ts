@@ -212,8 +212,15 @@ return;
 }
 
 // --- תחילת שינוי: מציאת המלאי המקסימלי למידה שנבחרה ---
-const sizeObj = product.sizes?.find((s: any) => s.size === size);
-const stockLimit = sizeObj ? (sizeObj.amount ?? sizeObj.quantity) : 99;
+// const sizeObj = product.sizes?.find((s: any) => s.size === size);
+// const stockLimit = sizeObj ? (sizeObj.amount ?? sizeObj.quantity) : 99;
+const sizeObj = product.sizes?.find((s: any) =>
+  Number(s.size ?? s.productSize ?? s.ProductSize) === Number(size)
+);
+
+const stockLimit = sizeObj
+  ? Number(sizeObj.amount ?? sizeObj.Amount ?? sizeObj.quantity ?? 0)
+  : 0;
 // --- סוף שינוי ---
 
 const existing = cart.find((item: any) =>
