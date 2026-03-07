@@ -1,7 +1,7 @@
 <div class="history-page">
   <h1 class="title">ההזמנות שלי</h1>
 
-  @for (order of orders; track order.orderId) {
+  @for (order of orders(); track order.orderId) {
     <div class="order-container">
       
       <div class="order-header">
@@ -12,6 +12,36 @@
         
         <div class="track-wrapper">
           <button class="track-btn">עקבי אחר ההזמנה</button>
+          
+         <button 
+    class="confirm-delivery-btn" 
+    [disabled]="order.status !== 3 || order.isUpdating"
+    [class.locked-btn]="order.status < 3"
+    [class.completed-btn]="order.status === 4"
+    (click)="confirmDelivery(order)">
+
+
+<!--     
+    @if (order.status < 3) {
+        ממתין למשלוח...
+    } @else if (order.status === 3) {
+        {{ order.isUpdating ? 'מעדכן...' : 'אישור קבלת חבילה' }}
+    } @else {
+        החבילה נמסרה ✓
+    } -->
+        @if (order.isUpdating) {
+            מעדכן...
+            } @else {
+            @if (order.status < 3) {
+            ממתין למשלוח...
+            } @else if (order.status === 3) {
+            אישור קבלת חבילה
+            } @else {
+            החבילה נמסרה ✓
+            }
+        }
+  </button>
+          
           <div class="status-popup">
             <app-order-stepper [status]="order.status"></app-order-stepper>
           </div>

@@ -26,4 +26,14 @@
     </div>
     <span>נשלחה</span>
   </div>
+
+  <div class="line" [class.filled]="isStepCompleted(OrderStatus.Delivered)"></div>
+
+  <div class="step" [class.active]="isStepCompleted(OrderStatus.Delivered)">
+    <div class="circle">
+      <span *ngIf="status < OrderStatus.Delivered">4</span>
+      <span *ngIf="status >= OrderStatus.Delivered">✓</span>
+    </div>
+    <span>נמסרה</span>
+  </div>
 </div>

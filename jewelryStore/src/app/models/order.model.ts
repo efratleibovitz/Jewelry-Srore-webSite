@@ -41,7 +41,8 @@ export interface Order {
   items?: OrderItem[];
   shippingAddress?: Address;
   // orderItems: OrderItemDto[];
-  orderItems: OrderItem[]
+  orderItems: OrderItem[];
+  isUpdating?: boolean; // שדה עזר למעקב אחרי עדכון סטטוס
 }
 
 
