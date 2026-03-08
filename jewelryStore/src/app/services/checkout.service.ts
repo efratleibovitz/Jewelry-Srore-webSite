@@ -551,22 +551,38 @@ export class CheckoutService {
 
     this.updateSubtotal(sum);
   }
+private getUserIdFromStorage(): number | null {
 
-  private getUserIdFromStorage(): number | null {
-    const raw = localStorage.getItem('UserId');
-    if (!raw) return null;
+  const raw = sessionStorage.getItem('user');
 
-    const asNum = Number(raw);
-    if (Number.isFinite(asNum) && asNum > 0) return asNum;
+  if (!raw) return null;
 
-    try {
-      const obj = JSON.parse(raw);
-      const id = Number(obj?.userId ?? obj?.UserId ?? obj?.id);
-      return Number.isFinite(id) && id > 0 ? id : null;
-    } catch {
-      return null;
-    }
+  try {
+    const user = JSON.parse(raw);
+    const id = Number(user?.id);
+
+    return Number.isFinite(id) && id > 0 ? id : null;
+
+  } catch {
+    return null;
   }
+}
+  // private getUserIdFromStorage(): number | null {
+  //   // const raw = localStorage.getItem('UserId');
+  //   const raw = sessionStorage.getItem('id');
+  //   if (!raw) return null;
+
+  //   const asNum = Number(raw);
+  //   if (Number.isFinite(asNum) && asNum > 0) return asNum;
+
+  //   try {
+  //     const obj = JSON.parse(raw);
+  //     const id = Number(obj?.userId ?? obj?.UserId ?? obj?.id);
+  //     return Number.isFinite(id) && id > 0 ? id : null;
+  //   } catch {
+  //     return null;
+  //   }
+  // }
 
   private toHebrewShipping(method: string): string {
     return method === 'pickup' ? 'איסוף מהסניף הקרוב' : 'משלוח עד הבית';
