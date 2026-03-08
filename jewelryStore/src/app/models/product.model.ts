@@ -21,7 +21,7 @@ export interface ProductSize {
 }
 
 export interface Size {
-    productSize: string; // לשנות ל-p קטנה
+    productSize: number; // לשנות ל-p קטנה
     amount: number;      // לשנות ל-a קטנה
 }
 export interface AdminProduct {

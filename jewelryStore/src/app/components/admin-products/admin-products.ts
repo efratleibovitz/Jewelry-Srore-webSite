@@ -23,8 +23,9 @@ export class AdminProducts implements OnInit {
   constructor(private productService: ProductService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+        this.initForm();
+
     this.loadProducts();
-    this.initForm();
   }
 
   initForm() {
